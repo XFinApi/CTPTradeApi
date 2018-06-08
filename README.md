@@ -17,7 +17,7 @@
 #### 支持交易接口
 
 - CTP 上期所接口
-- Feams 飞马接口
+- Feams 飞马中金所接口
 - Sgit 飞鼠郑商所接口
 - XSpeed 大连飞创XSpeed柜台接口
 - ZDCTP 直达CTP平台，外盘交易接口
