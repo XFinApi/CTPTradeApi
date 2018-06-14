@@ -77,8 +77,8 @@ public:
 		TradeAddress = "180.168.146.187:10000";
 
 		BrokerID = "9999";
-		UserName = "086206";
-		Password = "123456";
+		UserName = "119486";
+		Password = "a123456";
 
 		InstrumentID = "au1812";
 	}
