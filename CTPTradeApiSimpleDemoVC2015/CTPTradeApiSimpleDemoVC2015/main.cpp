@@ -77,7 +77,7 @@ public:
 		TradeAddress = "180.168.146.187:10000";
 
 		BrokerID = "9999";
-		UserName = "119486";
+		UserName = "119486";//公用测试账户。为了测试准确，请注册使用您自己的账户。
 		Password = "a123456";
 
 		InstrumentID = "au1812";
