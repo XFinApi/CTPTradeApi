@@ -31,9 +31,9 @@ namespace TradeApi
         // 价格
         double Price = DOUBLE_DEFAULT;
         // 数量
-        int64_t Volume = INT64_DEFAULT;
+		int32_t Volume = 0;
         // 未平仓量
-        int64_t UnCloseVolume = INT64_DEFAULT;
+		int32_t UnCloseVolume = 0;
 
         // 交易方向
         TradeDirection Direction = TradeDirection::Sell;
@@ -42,14 +42,14 @@ namespace TradeApi
         // 投机套保类型
         HedgeKind HedgeType = HedgeKind::Speculation;
         // 是否昨单
-        Boolean IsYesterdayTrade = Boolean::Default;
+        bool IsYesterdayTrade = false;
 
         // 平仓盈亏
-        double CloseProfit = DOUBLE_DEFAULT;
+        double CloseProfit = 0.0;
         // 占用保证金
-        double CurrMargin = DOUBLE_DEFAULT;
+        double CurrMargin = 0.0;
         // 手续费
-        double Commission = DOUBLE_DEFAULT;
+        double Commission = 0.0;
     };
 }
 }

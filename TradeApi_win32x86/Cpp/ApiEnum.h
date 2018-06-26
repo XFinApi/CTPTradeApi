@@ -35,14 +35,6 @@ namespace XFinApi
 			ErrAuthTimeOut = 11,
 		};
 
-		// 三相布尔值
-		enum class Boolean
-		{
-			False = 0,
-			True = 1,
-			Default = 2
-		};
-
 		// 事件 
 		enum class Action
 		{
@@ -422,7 +414,7 @@ namespace XFinApi
 		};
 
 		// 动作
-		enum class ActionKind
+		enum class OrderActionKind
 		{
 			// 下单
 			Insert = 0,

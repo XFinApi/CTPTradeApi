@@ -46,9 +46,9 @@ namespace TradeApi
         // 价格
         double Price = DOUBLE_DEFAULT;
         // 数量
-        int64_t Volume = INT64_DEFAULT;
+		int32_t Volume = 0;
         // 未成交量
-        int64_t NoTradedVolume = INT64_DEFAULT;
+		int32_t NoTradedVolume = 0;
 
         // 报单状态
         OrderStatus Status = OrderStatus::Unknown;
@@ -67,24 +67,24 @@ namespace TradeApi
         // 委托类型
         OrderKind OrderType = OrderKind::Order;
         // 动作类型
-        ActionKind ActionType = ActionKind::Insert;
+        OrderActionKind ActionType = OrderActionKind::Insert;
 		// 执行结果
 		ExecResultKind ExecResult = ExecResultKind::NoExec;
 		// 执行条件
 		ContingentCondKind ContingentCond = ContingentCondKind::Immediately;
 
         // 冻结保证金
-        double FrozenMargin = DOUBLE_DEFAULT;
+        double FrozenMargin = 0.0;
         // 冻结手续费
-        double FrozenCommission = DOUBLE_DEFAULT;
+        double FrozenCommission = 0.0;
 
         // 冰山单显示数量
-        int64_t ShowVolume = 0;
+		int32_t ShowVolume = 0;
 		// 最小成交量
-		int64_t MinVolume = 0;
+		int32_t MinVolume = 0;
 
         //价格最小变化位数
-        int PricePrecision = 0;
+		int32_t PricePrecision = 0;
     };
 }
 }

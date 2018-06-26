@@ -17,7 +17,7 @@
 
 #define XFINAPI_ITRADEAPI_VERSION	"XFinApi.TradeApi.180302" XFINAPI_VERSION_POSTFIX
 
-#if !defined(TRADEAPI_API)
+#if !defined(XFINAPI)
 # if defined(_MSC_VER)
 #  if defined(TRADEAPI_EXPORT)
 #   define XFINAPI __declspec(dllexport)
@@ -27,7 +27,7 @@
 #   define XFINAPI __declspec(dllimport)
 #  endif
 # else
-#  define XFINAPI
+#  define XFINAPI __attribute__((visibility("default")))
 # endif
 #endif
 

@@ -56,7 +56,7 @@ namespace TradeApi
         // 最小变动价位
         double PriceTick = DOUBLE_DEFAULT;
         //价格最小变化位数
-        int PricePrecision = 0;
+		int32_t PricePrecision = 0;
 
         // 当前是否交易
         bool IsTrading = false;
@@ -68,54 +68,54 @@ namespace TradeApi
         // 执行价
         double StrikePrice = DOUBLE_DEFAULT;
         // 期权类型
-        int OptionsType = INT32_DEFAULT;
+		int32_t OptionsType = INT32_DEFAULT;
         // 合约基础商品乘数
         double UnderlyingMultiple = DOUBLE_DEFAULT;
         // 组合类型
-        int CombinationType = INT32_DEFAULT;
+		int32_t CombinationType = INT32_DEFAULT;
         // 期权执行方式
-        int StrikeModeType = INT32_DEFAULT;
+		int32_t StrikeModeType = INT32_DEFAULT;
 
         // 持仓
         // 多今仓
-        int PositionBuyToday = INT32_DEFAULT;
+		int32_t PositionBuyToday = 0;
         // 多昨仓
-        int PositionBuyYesterday = INT32_DEFAULT;
+		int32_t PositionBuyYesterday = 0;
         // 多总持仓
-        int PositionBuy = INT32_DEFAULT;
+		int32_t PositionBuy = 0;
         // 空今仓
-        int PositionSellToday = INT32_DEFAULT;
+		int32_t PositionSellToday = 0;
         // 空昨仓
-        int PositionSellYesterday = INT32_DEFAULT;
+		int32_t PositionSellYesterday = 0;
         // 空总持仓
-        int PositionSell = INT32_DEFAULT;
+		int32_t PositionSell = 0;
         // 总持仓
-        int PositionTotal = INT32_DEFAULT;
+		int32_t PositionTotal = 0;
         // 撤单数
-        int CanceledOrderCount = INT32_DEFAULT;
+		int32_t CanceledOrderCount = 0;
         // 报单总数
-        int AddOrderCount = INT32_DEFAULT;
+		int32_t AddOrderCount = 0;
         // 成交总数
-        int SumTradeVolume = INT32_DEFAULT;
+		int32_t SumTradeVolume = 0;
 
         // 买开总数
-        int BuyOpenSum = INT32_DEFAULT;
+		int32_t BuyOpenSum = 0;
         // 卖开总数
-        int SellOpenSum = INT32_DEFAULT;
+		int32_t SellOpenSum = 0;
 
         // 报单未成交数
         // 开仓未成交数
-        int UntradeOpen = INT32_DEFAULT;
+		int32_t UntradeOpen = 0;
         // 买开未成交数
-        int UntradeBuyOpen = INT32_DEFAULT;
+		int32_t UntradeBuyOpen = 0;
         // 卖开未成交数
-        int UntradeSellOpen = INT32_DEFAULT;
+		int32_t UntradeSellOpen = 0;
         // 平仓未成交数
-        int UntradeClose = INT32_DEFAULT;
+		int32_t UntradeClose = 0;
         // 买平未成交数
-        int UntradeBuyClose = INT32_DEFAULT;
+		int32_t UntradeBuyClose = 0;
         // 卖平未成交数
-        int UntradeSellClose = INT32_DEFAULT;
+		int32_t UntradeSellClose = 0;
 
         // 手续费率
         // 开仓手续费率
@@ -171,55 +171,55 @@ namespace TradeApi
 
         // 资金相关
         // 多持仓均价
-        double LongAvgPrice = DOUBLE_DEFAULT;
+        double LongAvgPrice = 0.0;
         // 空持仓均价
-        double ShortAvgPrice = DOUBLE_DEFAULT;
+        double ShortAvgPrice = 0.0;
 
         // 冻结保证金
-        double FrozenMargin = DOUBLE_DEFAULT;
+        double FrozenMargin = 0.0;
         // 多冻结保证金
-        double LongFrozenMargin = DOUBLE_DEFAULT;
+        double LongFrozenMargin = 0.0;
         // 空冻结保证金
-        double ShortFrozenMargin = DOUBLE_DEFAULT;
+        double ShortFrozenMargin = 0.0;
 
         // 冻结手续费
-        double FrozenCommission = DOUBLE_DEFAULT;
+        double FrozenCommission = 0.0;
         // 开仓冻结手续费
-        double OpenFrozenCommission = DOUBLE_DEFAULT;
+        double OpenFrozenCommission = 0.0;
         // 平仓冻结手续费
-        double CloseFrozenCommission = DOUBLE_DEFAULT;
+        double CloseFrozenCommission = 0.0;
         // 平今冻结手续费
-        double CloseTodayFrozenCommission = DOUBLE_DEFAULT;
+        double CloseTodayFrozenCommission = 0.0;
 
         // 平仓盈亏
-        double CloseProfit = DOUBLE_DEFAULT;
+        double CloseProfit = 0.0;
         // 多平仓盈亏
-        double LongCloseProfit = DOUBLE_DEFAULT;
+        double LongCloseProfit = 0.0;
         // 空平仓盈亏
-        double ShortCloseProfit = DOUBLE_DEFAULT;
+        double ShortCloseProfit = 0.0;
 
         // 占用保证金
-        double CurrMargin = DOUBLE_DEFAULT;
+        double CurrMargin = 0.0;
         // 多头占用保证金
-        double LongCurrMargin = DOUBLE_DEFAULT;
+        double LongCurrMargin = 0.0;
         // 空头占用保证金
-        double ShortCurrMargin = DOUBLE_DEFAULT;
+        double ShortCurrMargin = 0.0;
 
         // 手续费
-        double Commission = DOUBLE_DEFAULT;
+        double Commission = 0.0;
         // 开仓手续费
-        double OpenCommission = DOUBLE_DEFAULT;
+        double OpenCommission = 0.0;
         // 平仓手续费
-        double CloseCommission = DOUBLE_DEFAULT;
+        double CloseCommission = 0.0;
         // 平今手续费
-        double CloseTodayCommission = DOUBLE_DEFAULT;
+        double CloseTodayCommission = 0.0;
 
         // 持仓盈亏
-        double PositionProfit = DOUBLE_DEFAULT;
+        double PositionProfit = 0.0;
         // 多仓持仓盈亏
-        double LongPositionProfit = DOUBLE_DEFAULT;
+        double LongPositionProfit = 0.0;
         // 空仓持仓盈亏
-        double ShortPositionProfit = DOUBLE_DEFAULT;
+        double ShortPositionProfit = 0.0;
     };
 }
 }

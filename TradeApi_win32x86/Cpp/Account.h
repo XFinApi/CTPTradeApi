@@ -12,51 +12,51 @@ namespace XFinApi
 			// 资金账号
 			std::string AccountID;
 			// 上次结算准备金
-			double PreBalance = DOUBLE_DEFAULT;
+			double PreBalance = 0.0;
 			// 上次信用额度
-			double PreCredit = DOUBLE_DEFAULT;
+			double PreCredit = 0.0;
 			// 上次质押金额
-			double PreMortgage = DOUBLE_DEFAULT;
+			double PreMortgage = 0.0;
 			// 质押金额
-			double Mortgage = DOUBLE_DEFAULT;
+			double Mortgage = 0.0;
 			// 出金金额
-			double Withdraw = DOUBLE_DEFAULT;
+			double Withdraw = 0.0;
 			// 入金金额
-			double Deposit = DOUBLE_DEFAULT;
+			double Deposit = 0.0;
 			// 投资者交割保证金
-			double DeliveryMargin = DOUBLE_DEFAULT;
+			double DeliveryMargin = 0.0;
 			//冻结保证金
-			double FrozenMargin = DOUBLE_DEFAULT;
+			double FrozenMargin = 0.0;
 			//冻结的手续费	
-			double FrozenCommission = DOUBLE_DEFAULT;
+			double FrozenCommission = 0.0;
 			//冻结的资金	
-			double FrozenCash = DOUBLE_DEFAULT;
+			double FrozenCash = 0.0;
 			//当前占用保证金总额	
-			double CurrMargin = DOUBLE_DEFAULT;
+			double CurrMargin = 0.0;
 			//手续费	
-			double Commission = DOUBLE_DEFAULT;
+			double Commission = 0.0;
 			//平仓盈亏	
-			double CloseProfit = DOUBLE_DEFAULT;
+			double CloseProfit = 0.0;
 			//持仓盈亏	
-			double PositionProfit = DOUBLE_DEFAULT;
+			double PositionProfit = 0.0;
 			//可用资金, 购买力(=信贷限额+现金结余+商品盈亏-基本保証金)
-			double Available = DOUBLE_DEFAULT;
+			double Available = 0.0;
 			//期货结算准备金	
-			double Balance = DOUBLE_DEFAULT;
+			double Balance = 0.0;
 
 			//SP
 			//资产净值（=现金结余+商品盈亏）
-			double NetAssetValue = DOUBLE_DEFAULT;
+			double NetAssetValue = 0.0;
 			//信贷限额
-			double CreditLimit = DOUBLE_DEFAULT;
+			double CreditLimit = 0.0;
 			//现金结余
-			double CashBal = DOUBLE_DEFAULT;
+			double CashBal = 0.0;
 			//基本保証金
-			double IMargin = DOUBLE_DEFAULT;
+			double IMargin = 0.0;
 			//維持保証金
-			double MMargin = DOUBLE_DEFAULT;
+			double MMargin = 0.0;
 			//商品盈亏
-			double CommodityPL = DOUBLE_DEFAULT;
+			double CommodityPL = 0.0;
 
 		};
 	}
