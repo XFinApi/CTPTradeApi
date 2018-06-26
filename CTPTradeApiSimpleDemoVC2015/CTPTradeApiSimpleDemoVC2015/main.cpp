@@ -150,7 +150,7 @@ static void PrintTickInfo(const XFinApi::TradeApi::Tick &tick)
 
 static void  PrintOrderInfo(const XFinApi::TradeApi::Order &order)
 {
-	printf("  ProductType=%d, Ref=%s, ID=%s, InstID=%s, Price=%g, Volume=%lld, NoTradedVolume=%lld, Direction=%d, OpenCloseType=%d, PriceCond=%d, TimeCond=%d, VolumeCond=%d, Status=%d, Msg=%s, %s, FrontID=%lld, SessionID=%lld\n",
+	printf("  ProductType=%d, Ref=%s, ID=%s, InstID=%s, Price=%g, Volume=%ld, NoTradedVolume=%ld, Direction=%d, OpenCloseType=%d, PriceCond=%d, TimeCond=%d, VolumeCond=%d, Status=%d, Msg=%s, %s, FrontID=%lld, SessionID=%lld\n",
 		order.ProductType,
 		order.OrderRef.c_str(), order.OrderID.c_str(),
 		order.InstrumentID.c_str(), order.Price, order.Volume, order.NoTradedVolume,
@@ -168,7 +168,7 @@ static void  PrintOrderInfo(const XFinApi::TradeApi::Order &order)
 
 static void  PrintTradeInfo(const XFinApi::TradeApi::TradeOrder &trade)
 {
-	printf("  ID=%s, OrderID=%s, InstID=%s, Price=%g, Volume=%lld, Direction=%d, OpenCloseType=%d, %s\n",
+	printf("  ID=%s, OrderID=%s, InstID=%s, Price=%g, Volume=%ld, Direction=%d, OpenCloseType=%d, %s\n",
 		trade.TradeID.c_str(), trade.OrderID.c_str(),
 		trade.InstrumentID.c_str(), trade.Price, trade.Volume,
 		trade.Direction, trade.OpenCloseType,
@@ -184,7 +184,7 @@ static void  PrintInstrumentInfo(const XFinApi::TradeApi::Instrument &inst)
 
 static void  PrintPositionInfo(const XFinApi::TradeApi::Position &pos)
 {
-	printf("  InstID=%s, Direction=%d, Price=%g, PosToday=%lld, PosYesterday=%lld, BuyPosition=%lld, SellPosition=%lld\n",
+	printf("  InstID=%s, Direction=%d, Price=%g, PosToday=%ld, PosYesterday=%ld, BuyPosition=%ld, SellPosition=%ld\n",
 		pos.InstrumentID.c_str(), pos.Direction,
 		DEFAULT_FILTER(pos.PreSettlementPrice),
 		DEFAULT_FILTER(pos.PositionToday), DEFAULT_FILTER(pos.PositionYesterday),
@@ -521,7 +521,7 @@ void TradeTest()
 	order.OpenCloseType = XFinApi::TradeApi::OpenCloseKind::Open;
 
 	//下单高级选项，可选择性设置
-	order.ActionType = XFinApi::TradeApi::ActionKind::Insert;//下单
+	order.ActionType = XFinApi::TradeApi::OrderActionKind::Insert;//下单
 	order.OrderType = XFinApi::TradeApi::OrderKind::Order;//标准单
 	order.PriceCond = XFinApi::TradeApi::PriceCondition::LimitPrice;//限价
 	order.VolumeCond = XFinApi::TradeApi::VolumeCondition::AnyVolume;//任意数量

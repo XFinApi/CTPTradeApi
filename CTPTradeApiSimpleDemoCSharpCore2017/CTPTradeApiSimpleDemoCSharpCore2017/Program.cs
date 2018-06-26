@@ -1,10 +1,8 @@
 ﻿/*******************************************************
-* CTPTradeApiSimpleDemoCSharp2015
+* CTPTradeApiSimpleDemoCSharpCore2017
 * www.xfinapi.com
 *******************************************************/
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using XFinApi.TradeApi;
 
