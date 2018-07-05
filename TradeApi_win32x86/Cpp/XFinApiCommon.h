@@ -51,7 +51,7 @@
     do { \
         if (IsDefaultValue(_p._field)) \
         { \
-            _codeInfos.emplace_back(Code::Err##_field, "", ""); \
+            _codeInfos.emplace_back(ErrorCodeKind::Err##_field, "", ""); \
         } \
     } while (0)
 
@@ -60,7 +60,7 @@
         auto _finded = _p.Configs.find(#_field); \
         if (_finded == _p.Configs.end() || IsDefaultValue(_finded->second)) \
         { \
-            _codeInfos.emplace_back(Code::Err##_field, "", ""); \
+            _codeInfos.emplace_back(ErrorCodeKind::Err##_field, "", ""); \
         } \
     } while (0)
 
@@ -68,7 +68,7 @@
     do { \
         if (!Utils::VerifyLetterNumber(_p._field)) \
         { \
-            _codeInfos.emplace_back(Code::Err##_field, "", ""); \
+            _codeInfos.emplace_back(ErrorCodeKind::Err##_field, "", ""); \
         } \
     } while (0)
 
@@ -109,7 +109,7 @@ namespace TradeApi
     }
 
 #if !defined(SWIG)
-    template <class T, class = std::enable_if_t<std::is_enum<T>::value>>
+    template <class T, class = typename std::enable_if<std::is_enum<T>::value>::type>
     bool IsDefaultValue(T e)
     {
         return e == T::Default;

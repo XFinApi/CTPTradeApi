@@ -52,18 +52,18 @@ namespace TradeApi
         // 限价单最小下单量
         int64_t MinLimitOrderVolume = INT64_DEFAULT;
         // 合约数量乘数
-        double VolumeMultiple = DOUBLE_DEFAULT;
+        double VolumeMultiple = 0.0;
         // 最小变动价位
-        double PriceTick = DOUBLE_DEFAULT;
+        double PriceTick = 0.0;
         //价格最小变化位数
-		int32_t PricePrecision = 0;
+		int64_t PricePrecision = 0;
 
         // 当前是否交易
         bool IsTrading = false;
         // 是否使用大额单边保证金算法
         bool MaxMarginSideAlgorithm = false;
         // 合约状态
-        InstrumentStatus Status = InstrumentStatus::NoTrading;
+        InstrumentStatusKind Status = InstrumentStatusKind::NoTrading;
 
         // 执行价
         double StrikePrice = DOUBLE_DEFAULT;
@@ -78,44 +78,44 @@ namespace TradeApi
 
         // 持仓
         // 多今仓
-		int32_t PositionBuyToday = 0;
+		int64_t PositionBuyToday = 0;
         // 多昨仓
-		int32_t PositionBuyYesterday = 0;
+		int64_t PositionBuyYesterday = 0;
         // 多总持仓
-		int32_t PositionBuy = 0;
+		int64_t PositionBuy = 0;
         // 空今仓
-		int32_t PositionSellToday = 0;
+		int64_t PositionSellToday = 0;
         // 空昨仓
-		int32_t PositionSellYesterday = 0;
+		int64_t PositionSellYesterday = 0;
         // 空总持仓
-		int32_t PositionSell = 0;
+		int64_t PositionSell = 0;
         // 总持仓
-		int32_t PositionTotal = 0;
+		int64_t PositionTotal = 0;
         // 撤单数
-		int32_t CanceledOrderCount = 0;
+		int64_t CanceledOrderCount = 0;
         // 报单总数
-		int32_t AddOrderCount = 0;
+		int64_t AddOrderCount = 0;
         // 成交总数
-		int32_t SumTradeVolume = 0;
+		int64_t SumTradeVolume = 0;
 
         // 买开总数
-		int32_t BuyOpenSum = 0;
+		int64_t BuyOpenSum = 0;
         // 卖开总数
-		int32_t SellOpenSum = 0;
+		int64_t SellOpenSum = 0;
 
         // 报单未成交数
         // 开仓未成交数
-		int32_t UntradeOpen = 0;
+		int64_t UntradeOpen = 0;
         // 买开未成交数
-		int32_t UntradeBuyOpen = 0;
+		int64_t UntradeBuyOpen = 0;
         // 卖开未成交数
-		int32_t UntradeSellOpen = 0;
+		int64_t UntradeSellOpen = 0;
         // 平仓未成交数
-		int32_t UntradeClose = 0;
+		int64_t UntradeClose = 0;
         // 买平未成交数
-		int32_t UntradeBuyClose = 0;
+		int64_t UntradeBuyClose = 0;
         // 卖平未成交数
-		int32_t UntradeSellClose = 0;
+		int64_t UntradeSellClose = 0;
 
         // 手续费率
         // 开仓手续费率

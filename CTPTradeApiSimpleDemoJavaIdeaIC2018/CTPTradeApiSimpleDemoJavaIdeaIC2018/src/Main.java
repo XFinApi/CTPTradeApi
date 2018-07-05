@@ -49,7 +49,7 @@ public class Main {
                     ";LowerMessage=" + info.getLowerMessage() + ")";
         }
 
-        System.out.println(String.format(" OnNotify: Action=%d, Result=%d %s", param.getAction(), param.getResult(), strs));
+        System.out.println(String.format(" OnNotify: Action=%d, Result=%d %s", param.getActionType(), param.getResultType(), strs));
     }
 
     static void PrintSubscribedInfo(XFinApi.TradeApi.QueryParams instInfo) {
@@ -153,8 +153,8 @@ public class Main {
             PrintNotifyInfo(notifyParams);
 
             //连接成功后可订阅合约
-            if (XFinApi.TradeApi.Action.Open.swigValue() == notifyParams.getAction() &&
-                    XFinApi.TradeApi.Result.Success.swigValue() == notifyParams.getResult() && market != null) {
+            if (XFinApi.TradeApi.ActionKind.Open.swigValue() == notifyParams.getActionType() &&
+                    XFinApi.TradeApi.ResultKind.Success.swigValue() == notifyParams.getResultType() && market != null) {
                 //订阅
                 XFinApi.TradeApi.QueryParams param = new XFinApi.TradeApi.QueryParams();
                 param.setInstrumentID(Cfg.InstrumentID);
@@ -318,8 +318,8 @@ public class Main {
             连接成功后才能执行订阅行情等操作，检测方法有两种：
             1、IMarket.IsOpened()=true
             2、MarketListener.OnNotify中
-            (int)XFinApi.TradeApi.Action.Open == notifyParams.Action
-            (int)XFinApi.TradeApi.Result.Success == notifyParams.Result
+            XFinApi.TradeApi.ActionKind.Open.swigValue() == notifyParams.getActionType() &&
+            XFinApi.TradeApi.ResultKind.Success.swigValue() == notifyParams.getResultType()
             */
 
             /* 行情相关方法
@@ -419,15 +419,15 @@ public class Main {
             order.setInstrumentID(Cfg.InstrumentID);
             order.setPrice(Cfg.SellPrice1);
             order.setVolume(1);
-            order.setDirection(XFinApi.TradeApi.TradeDirection.Buy);
+            order.setDirection(XFinApi.TradeApi.DirectionKind.Buy);
             order.setOpenCloseType(XFinApi.TradeApi.OpenCloseKind.Open);
 
             //下单高级选项，可选择性设置
             order.setActionType(XFinApi.TradeApi.OrderActionKind.Insert);//下单
             order.setOrderType(XFinApi.TradeApi.OrderKind.Order);//标准单
-            order.setPriceCond(XFinApi.TradeApi.PriceCondition.LimitPrice);//限价
-            order.setVolumeCond(XFinApi.TradeApi.VolumeCondition.AnyVolume);//任意数量
-            order.setTimeCond(XFinApi.TradeApi.TimeCondition.GFD);//当日有效
+            order.setPriceCond(XFinApi.TradeApi.PriceConditionKind.LimitPrice);//限价
+            order.setVolumeCond(XFinApi.TradeApi.VolumeConditionKind.AnyVolume);//任意数量
+            order.setTimeCond(XFinApi.TradeApi.TimeConditionKind.GFD);//当日有效
             order.setContingentCond(XFinApi.TradeApi.ContingentCondKind.Immediately);//立即
             order.setHedgeType(XFinApi.TradeApi.HedgeKind.Speculation);//投机
             order.setExecResult(XFinApi.TradeApi.ExecResultKind.NoExec);//没有执行

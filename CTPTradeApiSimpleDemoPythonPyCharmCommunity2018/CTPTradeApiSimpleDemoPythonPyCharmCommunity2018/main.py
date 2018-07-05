@@ -57,8 +57,12 @@ class MarketEvent(XFinApi_TradeApi.MarketListener):
         for codeinfo in notifyParams.CodeInfos:
             str += "(Code={};LowerCode={};LowerMessage={})".format(
                 codeinfo.Code, codeinfo.LowerCode, codeinfo.LowerMessage)
-        print(str)
-        if XFinApi_TradeApi.Action_Open == notifyParams.Action and XFinApi_TradeApi.Result_Success == notifyParams.Result:
+        print(" OnNotify: Action={}, Result={}{}".format(
+            notifyParams.ActionType,
+            notifyParams.ResultType,
+            str
+        ))
+        if XFinApi_TradeApi.ActionKind_Open == notifyParams.ActionType and XFinApi_TradeApi.ResultKind_Success == notifyParams.ResultType:
             # 订阅
             param = XFinApi_TradeApi.QueryParams()
             param.InstrumentID = self.cfg.InstrumentID
@@ -136,7 +140,11 @@ class TradeEvent(XFinApi_TradeApi.TradeListener):
         for codeinfo in notifyParams.CodeInfos:
             str += "(Code={};LowerCode={};LowerMessage={})".format(
                 codeinfo.Code, codeinfo.LowerCode, codeinfo.LowerMessage)
-        print(str)
+        print(" OnNotify: Action={}, Result={}{}".format(
+            notifyParams.ActionType,
+            notifyParams.ResultType,
+            str
+        ))
 
     def OnUpdateOrder(self,order):
         print("- OnUpdateOrder:")
@@ -239,8 +247,7 @@ class TradeTest:
         # 连接成功后才能执行查询、委托等操作，检测方法有两种：
         # 1、ITrade.IsOpened() = true
         # 2、TradeListener.OnNotify中
-        # (int) XFinApi.TradeApi.Action.Open == notifyParams.Action
-        # (int) XFinApi.TradeApi.Result.Success == notifyParams.Result
+        #  XFinApi_TradeApi.ActionKind_Open == notifyParams.ActionType and XFinApi_TradeApi.ResultKind_Success == notifyParams.ResultType
         while self.trade.IsOpened() != 1:
             time.sleep(1)
 
@@ -284,14 +291,14 @@ class TradeTest:
         order.InstrumentID = self.cfg.InstrumentID
         order.Price = self.cfg.BidPrice1
         order.Volume = 1
-        order.Direction = XFinApi_TradeApi.TradeDirection_Buy
+        order.Direction = XFinApi_TradeApi.DirectionKind_Buy
         order.OpenCloseType = XFinApi_TradeApi.OpenCloseKind_Open
         # 下单高级选项，可选择性设置
         order.ActionType = XFinApi_TradeApi.OrderActionKind_Insert  # 下单
         order.OrderType = XFinApi_TradeApi.OrderKind_Order  # 标准单
-        order.PriceCond = XFinApi_TradeApi.PriceCondition_LimitPrice  # 限价
-        order.VolumeCond = XFinApi_TradeApi.VolumeCondition_AnyVolume  # 任意数量
-        order.TimeCond = XFinApi_TradeApi.TimeCondition_GFD  # 当日有效
+        order.PriceCond = XFinApi_TradeApi.PriceConditionKind_LimitPrice  # 限价
+        order.VolumeCond = XFinApi_TradeApi.VolumeConditionKind_AnyVolume  # 任意数量
+        order.TimeCond = XFinApi_TradeApi.TimeConditionKind_GFD  # 当日有效
         order.ContingentCond = XFinApi_TradeApi.ContingentCondKind_Immediately  # 立即
         order.HedgeType = XFinApi_TradeApi.HedgeKind_Speculation  # 投机
         self.trade.OrderAction(order)

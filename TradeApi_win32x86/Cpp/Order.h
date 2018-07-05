@@ -46,22 +46,22 @@ namespace TradeApi
         // 价格
         double Price = DOUBLE_DEFAULT;
         // 数量
-		int32_t Volume = 0;
+		int64_t Volume = 0;
         // 未成交量
-		int32_t NoTradedVolume = 0;
+		int64_t NoTradedVolume = 0;
 
         // 报单状态
-        OrderStatus Status = OrderStatus::Unknown;
+        OrderStatusKind Status = OrderStatusKind::Unknown;
         // 交易方向
-        TradeDirection Direction = TradeDirection::Sell;
+        DirectionKind Direction = DirectionKind::Sell;
         // 开平类型
         OpenCloseKind OpenCloseType = OpenCloseKind::Open;
         // 价格条件
-        PriceCondition PriceCond = PriceCondition::LimitPrice ;
+        PriceConditionKind PriceCond = PriceConditionKind::LimitPrice ;
         // 有效期条件
-        TimeCondition TimeCond = TimeCondition::GFD;
+        TimeConditionKind TimeCond = TimeConditionKind::GFD;
         // 成交量条件
-        VolumeCondition VolumeCond = VolumeCondition::AnyVolume;
+        VolumeConditionKind VolumeCond = VolumeConditionKind::AnyVolume;
         // 投机套保类型
         HedgeKind HedgeType = HedgeKind::Speculation;
         // 委托类型
@@ -79,9 +79,9 @@ namespace TradeApi
         double FrozenCommission = 0.0;
 
         // 冰山单显示数量
-		int32_t ShowVolume = 0;
+		int64_t ShowVolume = 0;
 		// 最小成交量
-		int32_t MinVolume = 0;
+		int64_t MinVolume = 0;
 
         //价格最小变化位数
 		int32_t PricePrecision = 0;

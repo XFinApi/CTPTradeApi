@@ -36,7 +36,7 @@ namespace XFinApi
 		};
 
 		// 事件 
-		enum class Action
+		enum class ActionKind
 		{
 			// 底层返回
 			LowerRet = 0,
@@ -75,7 +75,7 @@ namespace XFinApi
 		};
 
 		// 事件结果
-		enum class Result
+		enum class ResultKind
 		{
 			// 成功
 			Success = 0,
@@ -86,7 +86,7 @@ namespace XFinApi
 		};
 
 		// 代码
-		namespace Code
+		namespace ErrorCodeKind
 		{
 #define DEFINE_CODE(_x) static const std::string _x = #_x
 
@@ -237,7 +237,7 @@ namespace XFinApi
 		};
 
 		// 报单状态
-		enum class OrderStatus
+		enum class OrderStatusKind
 		{
 			// 下单错误
 			Error = 0,
@@ -295,7 +295,7 @@ namespace XFinApi
 		};
 
 		// 交易方向
-		enum class TradeDirection
+		enum class DirectionKind
 		{
 			// 买
 			Buy = 0,
@@ -325,7 +325,7 @@ namespace XFinApi
 		};
 
 		// 价格条件
-		enum class PriceCondition
+		enum class PriceConditionKind
 		{
 			// 任意价/市价
 			AnyPrice = 0,
@@ -334,7 +334,7 @@ namespace XFinApi
 		};
 
 		// 时间条件
-		enum class TimeCondition
+		enum class TimeConditionKind
 		{
 			// 立即成交，否则撤单
 			IOC = 0,
@@ -355,7 +355,7 @@ namespace XFinApi
 		};
 
 		// 数量条件
-		enum class VolumeCondition
+		enum class VolumeConditionKind
 		{
 			// 任意量
 			AnyVolume = 0,
@@ -429,7 +429,7 @@ namespace XFinApi
 		};
 
 		// 合约状态
-		enum class InstrumentStatus
+		enum class InstrumentStatusKind
 		{
 			// 开盘前
 			BeforeTrading = 0,

@@ -43,6 +43,10 @@ namespace XFinApi
 			double Available = 0.0;
 			//期货结算准备金	
 			double Balance = 0.0;
+			//静态权益
+			double StaticRights = 0;
+			//动态权益
+			double ChangingRights = 0;   
 
 			//SP
 			//资产净值（=现金结余+商品盈亏）

@@ -25,21 +25,23 @@ namespace TradeApi
         double PreSettlementPrice = DOUBLE_DEFAULT;
 
         // 今仓
-        int32_t PositionToday = 0;
+		int64_t PositionToday = 0;
         // 昨仓
-		int32_t PositionYesterday = 0;
+		int64_t PositionYesterday = 0;
 
         // 交易方向
-        TradeDirection Direction = TradeDirection::Sell;
+        DirectionKind Direction = DirectionKind::Sell;
 
         // 净仓 = 今买仓 - 今卖仓 + 昨仓(昨仓根据昨仓买卖方向添正负号)
-		int32_t NetPosition = 0;
+		int64_t NetPosition = 0;
         // 今买仓
-		int32_t BuyPosition = 0;
+		int64_t BuyPosition = 0;
         // 今卖仓
-		int32_t SellPosition = 0;
+		int64_t SellPosition = 0;
 		// 昨仓买卖方向
-		TradeDirection PositionYesDirection = TradeDirection::Buy;
+		DirectionKind PositionYesDirection = DirectionKind::Buy;
+		// 历史持仓 (固定不变)
+		int64_t YdPosition = 0;
     };
 }
 }

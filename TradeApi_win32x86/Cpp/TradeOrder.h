@@ -31,12 +31,12 @@ namespace TradeApi
         // 价格
         double Price = DOUBLE_DEFAULT;
         // 数量
-		int32_t Volume = 0;
+		int64_t Volume = 0;
         // 未平仓量
-		int32_t UnCloseVolume = 0;
+		int64_t UnCloseVolume = 0;
 
         // 交易方向
-        TradeDirection Direction = TradeDirection::Sell;
+        DirectionKind Direction = DirectionKind::Sell;
         // 开平类型
         OpenCloseKind OpenCloseType = OpenCloseKind::Open;
         // 投机套保类型

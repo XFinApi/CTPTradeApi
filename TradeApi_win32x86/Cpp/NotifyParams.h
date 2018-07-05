@@ -47,20 +47,20 @@ namespace TradeApi
     // 通知数据
     struct NotifyParams
     {
-        int Action = INT32_DEFAULT;
-        int Result = INT32_DEFAULT;
+        int ActionType = INT32_DEFAULT;
+        int ResultType = INT32_DEFAULT;
         std::vector<CodeInfo> CodeInfos;
 
         void Clear()
         {
-            Action = INT32_DEFAULT;
-            Result = static_cast<int>(Result::Failed);
+            ActionType = INT32_DEFAULT;
+            ResultType = static_cast<int>(ResultKind::Failed);
             CodeInfos.clear();
         }
 
         bool IsSuccess() const
         {
-            return Result == static_cast<int>(Result::Success);
+            return ResultType == static_cast<int>(ResultKind::Success);
         }
     };
 }

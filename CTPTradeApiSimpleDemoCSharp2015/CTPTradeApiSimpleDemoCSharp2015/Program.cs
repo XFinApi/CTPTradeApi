@@ -62,7 +62,7 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             ";LowerMessage=" + info.LowerMessage + ")";
             }
 
-            Console.WriteLine(string.Format(" OnNotify: Action={0:d}, Result={1:d}{2}", param.Action, param.Result, strs));
+            Console.WriteLine(string.Format(" OnNotify: Action={0:d}, Result={1:d}{2}", param.ActionType, param.ResultType, strs));
         }
 
         static void PrintSubscribedInfo(QueryParams instInfo)
@@ -175,8 +175,8 @@ namespace CTPTradeApiSimpleDemoCSharp2015
                 PrintNotifyInfo(notifyParams);
 
                 //连接成功后可订阅合约
-                if ((int)XFinApi.TradeApi.Action.Open == notifyParams.Action &&
-                    (int)Result.Success == notifyParams.Result && market != null)
+                if ((int)XFinApi.TradeApi.ActionKind.Open == notifyParams.ActionType &&
+                    (int)ResultKind.Success == notifyParams.ResultType && market != null)
                 {
                     //订阅
                     QueryParams param = new QueryParams();
@@ -349,8 +349,8 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             连接成功后才能执行订阅行情等操作，检测方法有两种：
             1、IMarket.IsOpened()=true
             2、MarketListener.OnNotify中
-            (int)XFinApi.Action.Open == notifyParams.Action 
-            (int)XFinApi.Result.Success == notifyParams.Result
+            (int)XFinApi.TradeApi.ActionKind.Open == notifyParams.ActionType &&
+            (int)ResultKind.Success == notifyParams.ResultType
             */
 
             /* 行情相关方法
@@ -401,7 +401,7 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             //连接成功后才能执行查询、委托等操作，检测方法有两种：
             1、ITrade.IsOpened()=true
             2、TradeListener.OnNotify中
-            (int)XFinApi.Action.Open == notifyParams.Action 
+            (int)XFinApi.ActionType.Open == notifyParams.ActionType 
             (int)XFinApi.Result.Success == notifyParams.Result
              */
 
@@ -449,15 +449,15 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             order.InstrumentID = Cfg.InstrumentID;
             order.Price = Cfg.SellPrice1;
             order.Volume = 1;
-            order.Direction = TradeDirection.Buy;
+            order.Direction = DirectionKind.Buy;
             order.OpenCloseType = OpenCloseKind.Open;
 
             //下单高级选项，可选择性设置
             order.ActionType = OrderActionKind.Insert;//下单
             order.OrderType = OrderKind.Order;//标准单
-            order.PriceCond = PriceCondition.LimitPrice;//限价
-            order.VolumeCond = VolumeCondition.AnyVolume;//任意数量
-            order.TimeCond = TimeCondition.GFD;//当日有效
+            order.PriceCond = PriceConditionKind.LimitPrice;//限价
+            order.VolumeCond = VolumeConditionKind.AnyVolume;//任意数量
+            order.TimeCond = TimeConditionKind.GFD;//当日有效
             order.ContingentCond = ContingentCondKind.Immediately;//立即
             order.HedgeType = HedgeKind.Speculation;//投机
             order.ExecResult = ExecResultKind.NoExec;//没有执行
