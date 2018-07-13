@@ -72,16 +72,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(Solutiondir)..\TradeApi_win32x86\Cpp;$(IncludePath)</IncludePath>
-    <LibraryPath>$(Solutiondir)..\TradeApi_win32x86\Cpp;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(Solutiondir)..\XTA_W32\Cpp;$(IncludePath)</IncludePath>
+    <LibraryPath>$(Solutiondir)..\XTA_W32\Cpp;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(Solutiondir)..\TradeApi_win32x86\Cpp;$(IncludePath)</IncludePath>
-    <LibraryPath>$(Solutiondir)..\TradeApi_win32x86\Cpp;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(Solutiondir)..\XTA_W32\Cpp;$(IncludePath)</IncludePath>
+    <LibraryPath>$(Solutiondir)..\XTA_W32\Cpp;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

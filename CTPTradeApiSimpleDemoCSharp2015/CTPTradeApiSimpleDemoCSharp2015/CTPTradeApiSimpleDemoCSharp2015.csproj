@@ -35,7 +35,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="XFinApi.ITradeApi.DriverCS">
-      <HintPath>..\..\TradeApi_win32x86\CSharp\XFinApi.ITradeApi.DriverCS.dll</HintPath>
+      <HintPath>..\..\XTA_W32\CSharp\XFinApi.ITradeApi.DriverCS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -44,8 +44,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)..\..\TradeApi_win32x86\Api\CTPTradeApi_v6.3.6_20160606 TradeApi_win32x86\Api\CTPTradeApi_v6.3.6_20160606 /I /E /Y
-copy $(SolutionDir)..\..\TradeApi_win32x86\CSharp\XFinApi.ITradeApi.PortCS.dll XFinApi.ITradeApi.PortCS.dll /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(SolutionDir)..\..\XTA_W32\Api\CTP_v6.3.6_20160606 XTA_W32\Api\CTP_v6.3.6_20160606 /I /E /Y
+copy $(SolutionDir)..\..\XTA_W32\CSharp\XFinApi.ITradeApi.PortCS.dll XFinApi.ITradeApi.PortCS.dll /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

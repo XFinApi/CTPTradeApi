@@ -1,7 +1,7 @@
-xcopy ..\..\TradeApi_win32x86\Api\CTPTradeApi_v6.3.6_20160606 ..\Release\TradeApi_win32x86\Api\CTPTradeApi_v6.3.6_20160606 /I /E /Y
-copy ..\..\TradeApi_win32x86\Cpp\XFinApi.ITradeApi.dll ..\Release\XFinApi.ITradeApi.dll /Y
+xcopy ..\..\XTA_W32\Api\CTP_v6.3.6_20160606 ..\Release\XTA_W32\Api\CTP_v6.3.6_20160606 /I /E /Y
+copy ..\..\XTA_W32\Cpp\XFinApi.ITradeApi.dll ..\Release\XFinApi.ITradeApi.dll /Y
 
-xcopy ..\..\TradeApi_win32x86\Api\CTPTradeApi_v6.3.6_20160606 ..\Debug\TradeApi_win32x86\Api\CTPTradeApi_v6.3.6_20160606 /I /E /Y
-copy ..\..\TradeApi_win32x86\Cpp\XFinApi.ITradeApid.dll ..\Debug\XFinApi.ITradeApid.dll /Y
+xcopy ..\..\XTA_W32\Api\CTP_v6.3.6_20160606 ..\Debug\XTA_W32\Api\CTP_v6.3.6_20160606 /I /E /Y
+copy ..\..\XTA_W32\Cpp\XFinApi.ITradeApid.dll ..\Debug\XFinApi.ITradeApid.dll /Y
 
 pause

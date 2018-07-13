@@ -1,2 +1,2 @@
 #!/bin/sh
-cp -r ../../TradeApi_linux64 ./
+cp -r ../../XTA_L64 ./

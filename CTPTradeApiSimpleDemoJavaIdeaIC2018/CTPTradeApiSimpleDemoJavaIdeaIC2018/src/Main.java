@@ -126,7 +126,7 @@ public class Main {
     }
 
     //////////////////////////////////////////////////////////////////////////////////
-    //API 创建失败错误码的含义，其他错误码的含义参见TradeApi_win32x86\Cpp\ApiEnum.h文件
+    //API 创建失败错误码的含义，其他错误码的含义参见XTA_W32\Cpp\ApiEnum.h文件
     static String[] StrCreateErrors = {
             "无错误",
             "头文件与接口版本不匹配",
@@ -294,7 +294,7 @@ public class Main {
         // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
         int[] err = new int[1];
 
-        market = XFinApi.TradeApi.ITradeApi.XFinApi_CreateMarketApi("TradeApi_win32x86/Api/CTPTradeApi_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", err);
+        market = XFinApi.TradeApi.ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", err);
         if (err[0] > 0 && market == null) {
             System.out.println(String.format("* Market XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
             return;
@@ -344,7 +344,7 @@ public class Main {
         // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
         int[] err = new int[1];
 
-        trade = XFinApi.TradeApi.ITradeApi.XFinApi_CreateTradeApi("TradeApi_win32x86/Api/CTPTradeApi_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", err);
+        trade = XFinApi.TradeApi.ITradeApi.XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", err);
 
         if (trade == null) {
             System.out.println(String.format("* Trade XFinApiCreateError=%s;", StrCreateErrors[err[0]]));

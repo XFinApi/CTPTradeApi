@@ -6,6 +6,9 @@ import XFinApi_TradeApi
 import time
 
 
+# Python版本说明：Api使用32位python-3.6版本编译，建议开发时也使用该版本。#
+
+
 # 配置信息
 class Config:
     MarketAddress = "180.168.146.187:10010";
@@ -25,7 +28,7 @@ class Config:
 
 
 # API
-# 创建失败错误码的含义，其他错误码的含义参见TradeApi_win32x86\Cpp\ApiEnum.h文件
+# 创建失败错误码的含义，其他错误码的含义参见XTA_W32\Cpp\ApiEnum.h文件
 
 StrCreateErrors = [
     "无错误",
@@ -108,7 +111,7 @@ class MarketTest:
             XFinApi_TradeApi.XFinApi_ReleaseMarketApi(self.market)
 
     def test(self):
-        self.market = XFinApi_TradeApi.XFinApi_CreateMarketApi("TradeApi_win32x86/Api/CTPTradeApi_v6.3.6_20160606/XFinApi.CTPTradeApi.dll")
+        self.market = XFinApi_TradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll")
         if isinstance(self.market,int):
             print("* Market XFinApiCreateError={};".format(StrCreateErrors[self.market]))
             return
@@ -225,7 +228,7 @@ class TradeTest:
     def Test(self):
         # 创建ITrade char * path指xxx.exe同级子目录中的xxx.dll文件
         self.trade = XFinApi_TradeApi.XFinApi_CreateTradeApi(
-            "TradeApi_win32x86/Api/CTPTradeApi_v6.3.6_20160606/XFinApi.CTPTradeApi.dll")
+            "XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll")
         if isinstance(self.trade,int):
             print("* Trade XFinApiCreateError={};".format(StrCreateErrors[self.trade]))
             return
