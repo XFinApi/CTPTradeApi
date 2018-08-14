@@ -10,6 +10,7 @@ namespace TradeApi
     // 持仓信息
     struct Position
     {
+		virtual ~Position(){};
         // 投资者代码
         std::string InvestorID;
         // 经纪公司代码

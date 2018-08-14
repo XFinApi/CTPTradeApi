@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using XFinApi.TradeApi;
 
-namespace CTPTradeApiSimpleDemoCSharp2015
+namespace CTPTradeApiSimpleDemoCSharpCore2017
 {
     class Program
     {

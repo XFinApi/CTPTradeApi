@@ -13,6 +13,7 @@ namespace TradeApi
     class Tick
     {
     public:
+		virtual ~Tick() {};
         // 合约代码
         std::string InstrumentID;
         // 交易所代码
@@ -113,6 +114,8 @@ namespace TradeApi
 
         // 开仓限制
         int OpenRestriction = INT32_DEFAULT;
+		// 业务日期
+		std::string ActionDay;
 
     public:
         double GetBidPrice(int idx)

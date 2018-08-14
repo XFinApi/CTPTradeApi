@@ -226,6 +226,8 @@ namespace XFinApi
 			DEFINE_CODE(ErrNewPacker);
 			// 获取解包器失败
 			DEFINE_CODE(ErrNewUnPacker);
+			// 缓存目录太长
+			DEFINE_CODE(ErrCacheFolderTooLong);
 #undef DEFINE_CODE
 		}
 

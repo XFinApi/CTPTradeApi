@@ -377,8 +377,8 @@ void MarketTest()
 	连接成功后才能执行订阅行情等操作，检测方法有两种：
 	1、IMarket::IsOpened()=true
 	2、MarketListener::OnNotify中
-	(int)XFinApi::TradeApi::Action::Open == notifyParams.Action &&
-	(int)XFinApi::TradeApi::Result::Success == notifyParams.Result
+	(int)XFinApi::TradeApi::ActionKind::Open == notifyParams.ActionType &&
+	(int)XFinApi::TradeApi::ResultKind::Success == notifyParams.ResultType
 	*/
 
 	/* 行情相关方法
@@ -405,7 +405,7 @@ void TradeTest()
 
 	trade = XFinApi_CreateTradeApi("XTA_L64/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.so", &err);
 
-	if (err && !trade)
+	if (err || !trade)
 	{
 		printf("* Trade XFinApiCreateError=%s;\n", StrCreateErrors[err]);
 		return;
@@ -494,6 +494,10 @@ void TradeTest()
 
 int main()
 {
+	#if defined(__unix__)
+	system("sudo echo");
+	#endif
+	
 	//可在Config类中修改用户名、密码、合约等信息
 
 	MarketTest();

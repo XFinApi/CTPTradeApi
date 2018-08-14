@@ -10,6 +10,7 @@ namespace TradeApi
     // 开启参数
     struct OpenParams
     {
+		virtual ~OpenParams() {};
         // 用户名
         std::string UserID;
         // 密码

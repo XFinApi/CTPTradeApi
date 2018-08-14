@@ -9,9 +9,11 @@ namespace XFinApi
 		// 账户信息
 		struct Account
 		{
+			virtual ~Account() {};
+
 			// 资金账号
 			std::string AccountID;
-			// 上次结算准备金,ESI上日结存
+			// 上次结算准备金,ESI上日结存，ZDCTP昨结存
 			double PreBalance = 0.0;
 			// 上次信用额度
 			double PreCredit = 0.0;
@@ -39,9 +41,9 @@ namespace XFinApi
 			double CloseProfit = 0.0;
 			//持仓盈亏	
 			double PositionProfit = 0.0;
-			//可用资金, SP购买力(=信贷限额+现金结余+商品盈亏-基本保証金)，ESI当日可用
+			//可用资金, SP购买力(=信贷限额+现金结余+商品盈亏-基本保証金)，ESI当日可用,ZDCTP今可用
 			double Available = 0.0;
-			//期货结算准备金，ESI当日结存
+			//期货结算准备金，ESI当日结存，ZDCTP今结存
 			double Balance = 0.0;
 			//静态权益
 			double StaticRights = 0;
@@ -49,36 +51,40 @@ namespace XFinApi
 			double ChangingRights = 0;
 
 			//SP
-			//资产净值（=现金结余+商品盈亏）
+			//SP资产净值（=现金结余+商品盈亏）
 			double NetAssetValue = 0.0;
-			//信贷限额
+			//SP信贷限额
 			double CreditLimit = 0.0;
-			//现金结余
+			//SP现金结余
 			double CashBal = 0.0;
-			//基本保証金
+			//SP基本保証金
 			double IMargin = 0.0;
-			//維持保証金
+			//SP維持保証金，ZDCTP维持保证金
 			double MMargin = 0.0;
-			//商品盈亏
+			//SP商品盈亏
 			double CommodityPL = 0.0;
 
 			//ESI
-			// 上日权益
+			// ESI上日权益，ZDCTP昨权益
 			double PreEquity;
-			// 上日可用
+			// ESI上日可用，ZDCTP昨可用
 			double PreAvailable;
-			// 上日市值权益
+			// ESI上日市值权益
 			double PreMarketEquity;
-			// 客户初始保证金
+			// ESI客户初始保证金
 			double AccountIntialMargin;
-			// 客户维持保证金
+			// ESI客户维持保证金
 			double AccountMaintenanceMargin;
-			// 当日权益
+			// ESI当日权益，ZDCTP今权益
 			double Equity;
-			// 可提取
+			// ESI可提取
 			double CanDraw;
-			// 账户市值
+			// ESI账户市值
 			double MarketEquity;
+
+			//ZDCTP
+			//ZDCTP币种
+			std::string CurrencyNo;
 		};
 	}
 }

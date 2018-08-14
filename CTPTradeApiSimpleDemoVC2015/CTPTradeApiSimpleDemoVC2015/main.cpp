@@ -447,7 +447,7 @@ void TradeTest()
 #else
 	trade = XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", &err);
 #endif
-	if (err && !trade)
+	if (err || !trade)
 	{
 		printf("* Trade XFinApiCreateError=%s;\n", StrCreateErrors[err]);
 		return;

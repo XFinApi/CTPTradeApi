@@ -10,6 +10,7 @@ namespace TradeApi
     // 委托单信息
     struct Order
     {
+		virtual ~Order() {};
         // 投资者代码
         std::string InvestorID;
         // 经纪公司代码

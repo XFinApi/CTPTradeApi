@@ -10,6 +10,7 @@ namespace TradeApi
     // 成交单信息
     struct TradeOrder
     {
+		virtual ~TradeOrder() {};
         // 交易所代码
         std::string ExchangeID;
         // 品种代码

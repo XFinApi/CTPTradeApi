@@ -12,7 +12,11 @@ namespace TradeApi
 	// 合约信息
     class Instrument
     {
-    public:
+
+	public:
+		Instrument() {};
+		virtual ~Instrument(){};
+
         // 合约代码
         std::string InstrumentID;
         // 交易所代码

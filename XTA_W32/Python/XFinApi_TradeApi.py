@@ -967,6 +967,8 @@ class OpenParams(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, OpenParams, name)
     __repr__ = _swig_repr
+    __swig_destroy__ = _XFinApi_TradeApi.delete_OpenParams
+    __del__ = lambda self: None
     __swig_setmethods__["UserID"] = _XFinApi_TradeApi.OpenParams_UserID_set
     __swig_getmethods__["UserID"] = _XFinApi_TradeApi.OpenParams_UserID_get
     if _newclass:
@@ -1006,8 +1008,6 @@ class OpenParams(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_OpenParams
-    __del__ = lambda self: None
 OpenParams_swigregister = _XFinApi_TradeApi.OpenParams_swigregister
 OpenParams_swigregister(OpenParams)
 cvar = _XFinApi_TradeApi.cvar
@@ -1079,6 +1079,7 @@ ErrLicensePwd = cvar.ErrLicensePwd
 ErrSendQueueSize = cvar.ErrSendQueueSize
 ErrNewPacker = cvar.ErrNewPacker
 ErrNewUnPacker = cvar.ErrNewUnPacker
+ErrCacheFolderTooLong = cvar.ErrCacheFolderTooLong
 
 class CodeInfo(_object):
     __swig_setmethods__ = {}
@@ -1152,6 +1153,8 @@ class QueryParams(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, QueryParams, name)
     __repr__ = _swig_repr
+    __swig_destroy__ = _XFinApi_TradeApi.delete_QueryParams
+    __del__ = lambda self: None
     __swig_setmethods__["InvestorID"] = _XFinApi_TradeApi.QueryParams_InvestorID_set
     __swig_getmethods__["InvestorID"] = _XFinApi_TradeApi.QueryParams_InvestorID_get
     if _newclass:
@@ -1219,8 +1222,6 @@ class QueryParams(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_QueryParams
-    __del__ = lambda self: None
 QueryParams_swigregister = _XFinApi_TradeApi.QueryParams_swigregister
 QueryParams_swigregister(QueryParams)
 
@@ -1231,6 +1232,8 @@ class Tick(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Tick, name)
     __repr__ = _swig_repr
+    __swig_destroy__ = _XFinApi_TradeApi.delete_Tick
+    __del__ = lambda self: None
     __swig_setmethods__["InstrumentID"] = _XFinApi_TradeApi.Tick_InstrumentID_set
     __swig_getmethods__["InstrumentID"] = _XFinApi_TradeApi.Tick_InstrumentID_get
     if _newclass:
@@ -1423,6 +1426,10 @@ class Tick(_object):
     __swig_getmethods__["OpenRestriction"] = _XFinApi_TradeApi.Tick_OpenRestriction_get
     if _newclass:
         OpenRestriction = _swig_property(_XFinApi_TradeApi.Tick_OpenRestriction_get, _XFinApi_TradeApi.Tick_OpenRestriction_set)
+    __swig_setmethods__["ActionDay"] = _XFinApi_TradeApi.Tick_ActionDay_set
+    __swig_getmethods__["ActionDay"] = _XFinApi_TradeApi.Tick_ActionDay_get
+    if _newclass:
+        ActionDay = _swig_property(_XFinApi_TradeApi.Tick_ActionDay_get, _XFinApi_TradeApi.Tick_ActionDay_set)
 
     def GetBidPrice(self, idx: 'int') -> "double":
         return _XFinApi_TradeApi.Tick_GetBidPrice(self, idx)
@@ -1454,8 +1461,6 @@ class Tick(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_Tick
-    __del__ = lambda self: None
 Tick_swigregister = _XFinApi_TradeApi.Tick_swigregister
 Tick_swigregister(Tick)
 
@@ -1465,6 +1470,15 @@ class Instrument(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Instrument, name)
     __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _XFinApi_TradeApi.new_Instrument()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _XFinApi_TradeApi.delete_Instrument
+    __del__ = lambda self: None
     __swig_setmethods__["InstrumentID"] = _XFinApi_TradeApi.Instrument_InstrumentID_set
     __swig_getmethods__["InstrumentID"] = _XFinApi_TradeApi.Instrument_InstrumentID_get
     if _newclass:
@@ -1849,15 +1863,6 @@ class Instrument(_object):
     __swig_getmethods__["ShortPositionProfit"] = _XFinApi_TradeApi.Instrument_ShortPositionProfit_get
     if _newclass:
         ShortPositionProfit = _swig_property(_XFinApi_TradeApi.Instrument_ShortPositionProfit_get, _XFinApi_TradeApi.Instrument_ShortPositionProfit_set)
-
-    def __init__(self):
-        this = _XFinApi_TradeApi.new_Instrument()
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_Instrument
-    __del__ = lambda self: None
 Instrument_swigregister = _XFinApi_TradeApi.Instrument_swigregister
 Instrument_swigregister(Instrument)
 
@@ -1951,6 +1956,8 @@ class Order(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Order, name)
     __repr__ = _swig_repr
+    __swig_destroy__ = _XFinApi_TradeApi.delete_Order
+    __del__ = lambda self: None
     __swig_setmethods__["InvestorID"] = _XFinApi_TradeApi.Order_InvestorID_set
     __swig_getmethods__["InvestorID"] = _XFinApi_TradeApi.Order_InvestorID_get
     if _newclass:
@@ -2098,8 +2105,6 @@ class Order(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_Order
-    __del__ = lambda self: None
 Order_swigregister = _XFinApi_TradeApi.Order_swigregister
 Order_swigregister(Order)
 
@@ -2109,6 +2114,8 @@ class TradeOrder(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, TradeOrder, name)
     __repr__ = _swig_repr
+    __swig_destroy__ = _XFinApi_TradeApi.delete_TradeOrder
+    __del__ = lambda self: None
     __swig_setmethods__["ExchangeID"] = _XFinApi_TradeApi.TradeOrder_ExchangeID_set
     __swig_getmethods__["ExchangeID"] = _XFinApi_TradeApi.TradeOrder_ExchangeID_get
     if _newclass:
@@ -2188,8 +2195,6 @@ class TradeOrder(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_TradeOrder
-    __del__ = lambda self: None
 TradeOrder_swigregister = _XFinApi_TradeApi.TradeOrder_swigregister
 TradeOrder_swigregister(TradeOrder)
 
@@ -2199,6 +2204,8 @@ class Position(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Position, name)
     __repr__ = _swig_repr
+    __swig_destroy__ = _XFinApi_TradeApi.delete_Position
+    __del__ = lambda self: None
     __swig_setmethods__["InvestorID"] = _XFinApi_TradeApi.Position_InvestorID_set
     __swig_getmethods__["InvestorID"] = _XFinApi_TradeApi.Position_InvestorID_get
     if _newclass:
@@ -2262,8 +2269,6 @@ class Position(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_Position
-    __del__ = lambda self: None
 Position_swigregister = _XFinApi_TradeApi.Position_swigregister
 Position_swigregister(Position)
 
@@ -2273,6 +2278,8 @@ class Account(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Account, name)
     __repr__ = _swig_repr
+    __swig_destroy__ = _XFinApi_TradeApi.delete_Account
+    __del__ = lambda self: None
     __swig_setmethods__["AccountID"] = _XFinApi_TradeApi.Account_AccountID_set
     __swig_getmethods__["AccountID"] = _XFinApi_TradeApi.Account_AccountID_get
     if _newclass:
@@ -2405,6 +2412,10 @@ class Account(_object):
     __swig_getmethods__["MarketEquity"] = _XFinApi_TradeApi.Account_MarketEquity_get
     if _newclass:
         MarketEquity = _swig_property(_XFinApi_TradeApi.Account_MarketEquity_get, _XFinApi_TradeApi.Account_MarketEquity_set)
+    __swig_setmethods__["CurrencyNo"] = _XFinApi_TradeApi.Account_CurrencyNo_set
+    __swig_getmethods__["CurrencyNo"] = _XFinApi_TradeApi.Account_CurrencyNo_get
+    if _newclass:
+        CurrencyNo = _swig_property(_XFinApi_TradeApi.Account_CurrencyNo_get, _XFinApi_TradeApi.Account_CurrencyNo_set)
 
     def __init__(self):
         this = _XFinApi_TradeApi.new_Account()
@@ -2412,8 +2423,6 @@ class Account(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
-    __swig_destroy__ = _XFinApi_TradeApi.delete_Account
-    __del__ = lambda self: None
 Account_swigregister = _XFinApi_TradeApi.Account_swigregister
 Account_swigregister(Account)
 

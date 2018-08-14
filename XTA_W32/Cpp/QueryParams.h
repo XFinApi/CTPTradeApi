@@ -10,6 +10,7 @@ namespace TradeApi
     // 查询参数
 	struct QueryParams
     {
+		virtual ~QueryParams() {};
         // 投资者代码
         std::string InvestorID;
         // 经纪公司代码

@@ -401,8 +401,8 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             //连接成功后才能执行查询、委托等操作，检测方法有两种：
             1、ITrade.IsOpened()=true
             2、TradeListener.OnNotify中
-            (int)XFinApi.ActionType.Open == notifyParams.ActionType 
-            (int)XFinApi.Result.Success == notifyParams.Result
+            (int)XFinApi.TradeApi.ActionKind.Open == notifyParams.ActionType &&
+			(int)ResultKind.Success == notifyParams.ResultType
              */
 
             while (!trade.IsOpened())

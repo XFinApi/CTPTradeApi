@@ -11,7 +11,7 @@ OBJS=$(subst .cc,.o,$(SRCS))
 all: $(OBJS)
 	chmod +777 ./copy.sh
 	./copy.sh
-	$(CXX) $(CPPFLAGS) -o CTPTradeApiSimpleDemoLinux64GCC.elf $(OBJS) $(LDFLAGS) $(LDLIBS)
+	$(CXX) $(CPPFLAGS) -o CTPTradeApiSimpleDemoLinux64GCC $(OBJS) $(LDFLAGS) $(LDLIBS)
 
 clean:
 	$(RM) $(OBJS)
