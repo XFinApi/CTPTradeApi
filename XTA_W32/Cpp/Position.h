@@ -43,6 +43,16 @@ namespace TradeApi
 		DirectionKind PositionYesDirection = DirectionKind::Buy;
 		// 历史持仓 (固定不变)
 		int64_t YdPosition = 0;
+
+		// 持仓交易所占用保证金
+		double ExchangeMargin = DOUBLE_DEFAULT;
+
+		// 总持仓
+		int64_t PositionTotal = 0;
+		// 可卖持仓
+		int64_t PositionSellable = 0;
+		// 持仓成本
+		double AvgPrice = 0;
     };
 }
 }

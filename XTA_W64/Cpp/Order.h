@@ -36,7 +36,7 @@ namespace TradeApi
 
         // 报单引用
         std::string OrderRef;
-        // 报单代码
+        // 交易所委托编号
         std::string OrderID;
 
         // 前置机代码
@@ -44,8 +44,10 @@ namespace TradeApi
         // 会话代码
         int64_t SessionID = INT64_DEFAULT;
 
-		// 本地号
+		// 本地委托编号
 		std::string	OrderLocalNo;
+		// 柜台委托编号
+		std::string	OrderCounterNo;
 
         // 价格
         double Price = DOUBLE_DEFAULT;

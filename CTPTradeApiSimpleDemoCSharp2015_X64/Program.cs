@@ -26,7 +26,7 @@ namespace CTPTradeApiSimpleDemoCSharp2015_X64
             public string Password = "a123456";
 
             //合约
-            public string InstrumentID = "au1812";
+            public string InstrumentID = "au1912";
 
             //行情
             public double SellPrice1 = -1;

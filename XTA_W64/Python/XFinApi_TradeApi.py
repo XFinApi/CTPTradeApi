@@ -883,6 +883,8 @@ ActionKind_QueryTradeOrder = _XFinApi_TradeApi.ActionKind_QueryTradeOrder
 ActionKind_QueryInstrument = _XFinApi_TradeApi.ActionKind_QueryInstrument
 ActionKind_QueryPosition = _XFinApi_TradeApi.ActionKind_QueryPosition
 ActionKind_QueryAccount = _XFinApi_TradeApi.ActionKind_QueryAccount
+ActionKind_QueryInstrumentMarginRate = _XFinApi_TradeApi.ActionKind_QueryInstrumentMarginRate
+ActionKind_QueryInstrumentCommissionRate = _XFinApi_TradeApi.ActionKind_QueryInstrumentCommissionRate
 ResultKind_Success = _XFinApi_TradeApi.ResultKind_Success
 ResultKind_Failed = _XFinApi_TradeApi.ResultKind_Failed
 ResultKind_Undefined = _XFinApi_TradeApi.ResultKind_Undefined
@@ -922,6 +924,7 @@ OpenCloseKind_CloseYesterday = _XFinApi_TradeApi.OpenCloseKind_CloseYesterday
 OpenCloseKind_LocalForceClose = _XFinApi_TradeApi.OpenCloseKind_LocalForceClose
 OpenCloseKind_ForceOff = _XFinApi_TradeApi.OpenCloseKind_ForceOff
 OpenCloseKind__None = _XFinApi_TradeApi.OpenCloseKind__None
+OpenCloseKind_ForceCloseToday = _XFinApi_TradeApi.OpenCloseKind_ForceCloseToday
 PriceConditionKind_AnyPrice = _XFinApi_TradeApi.PriceConditionKind_AnyPrice
 PriceConditionKind_LimitPrice = _XFinApi_TradeApi.PriceConditionKind_LimitPrice
 TimeConditionKind_IOC = _XFinApi_TradeApi.TimeConditionKind_IOC
@@ -1080,6 +1083,11 @@ ErrSendQueueSize = cvar.ErrSendQueueSize
 ErrNewPacker = cvar.ErrNewPacker
 ErrNewUnPacker = cvar.ErrNewUnPacker
 ErrCacheFolderTooLong = cvar.ErrCacheFolderTooLong
+ErrExchangeRejectOrder = cvar.ErrExchangeRejectOrder
+ErrExchangeRejectCancelOrder = cvar.ErrExchangeRejectCancelOrder
+ErrAuthCode = cvar.ErrAuthCode
+ErrOrderCounterNo = cvar.ErrOrderCounterNo
+ErrNotSupport = cvar.ErrNotSupport
 
 class CodeInfo(_object):
     __swig_setmethods__ = {}
@@ -1232,6 +1240,13 @@ class Tick(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Tick, name)
     __repr__ = _swig_repr
+
+    def __init__(self):
+        this = _XFinApi_TradeApi.new_Tick()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
     __swig_destroy__ = _XFinApi_TradeApi.delete_Tick
     __del__ = lambda self: None
     __swig_setmethods__["InstrumentID"] = _XFinApi_TradeApi.Tick_InstrumentID_set
@@ -1454,13 +1469,6 @@ class Tick(_object):
 
     def SetAskVolume(self, idx: 'int', val: 'int64_t') -> "void":
         return _XFinApi_TradeApi.Tick_SetAskVolume(self, idx, val)
-
-    def __init__(self):
-        this = _XFinApi_TradeApi.new_Tick()
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
 Tick_swigregister = _XFinApi_TradeApi.Tick_swigregister
 Tick_swigregister(Tick)
 
@@ -1863,6 +1871,50 @@ class Instrument(_object):
     __swig_getmethods__["ShortPositionProfit"] = _XFinApi_TradeApi.Instrument_ShortPositionProfit_get
     if _newclass:
         ShortPositionProfit = _swig_property(_XFinApi_TradeApi.Instrument_ShortPositionProfit_get, _XFinApi_TradeApi.Instrument_ShortPositionProfit_set)
+    __swig_setmethods__["SellOpenRatioByMoney"] = _XFinApi_TradeApi.Instrument_SellOpenRatioByMoney_set
+    __swig_getmethods__["SellOpenRatioByMoney"] = _XFinApi_TradeApi.Instrument_SellOpenRatioByMoney_get
+    if _newclass:
+        SellOpenRatioByMoney = _swig_property(_XFinApi_TradeApi.Instrument_SellOpenRatioByMoney_get, _XFinApi_TradeApi.Instrument_SellOpenRatioByMoney_set)
+    __swig_setmethods__["SellCloseRatioByMoney"] = _XFinApi_TradeApi.Instrument_SellCloseRatioByMoney_set
+    __swig_getmethods__["SellCloseRatioByMoney"] = _XFinApi_TradeApi.Instrument_SellCloseRatioByMoney_get
+    if _newclass:
+        SellCloseRatioByMoney = _swig_property(_XFinApi_TradeApi.Instrument_SellCloseRatioByMoney_get, _XFinApi_TradeApi.Instrument_SellCloseRatioByMoney_set)
+    __swig_setmethods__["SellCloseTodayRatioByMoney"] = _XFinApi_TradeApi.Instrument_SellCloseTodayRatioByMoney_set
+    __swig_getmethods__["SellCloseTodayRatioByMoney"] = _XFinApi_TradeApi.Instrument_SellCloseTodayRatioByMoney_get
+    if _newclass:
+        SellCloseTodayRatioByMoney = _swig_property(_XFinApi_TradeApi.Instrument_SellCloseTodayRatioByMoney_get, _XFinApi_TradeApi.Instrument_SellCloseTodayRatioByMoney_set)
+    __swig_setmethods__["SellOpenRatioByVolume"] = _XFinApi_TradeApi.Instrument_SellOpenRatioByVolume_set
+    __swig_getmethods__["SellOpenRatioByVolume"] = _XFinApi_TradeApi.Instrument_SellOpenRatioByVolume_get
+    if _newclass:
+        SellOpenRatioByVolume = _swig_property(_XFinApi_TradeApi.Instrument_SellOpenRatioByVolume_get, _XFinApi_TradeApi.Instrument_SellOpenRatioByVolume_set)
+    __swig_setmethods__["SellCloseRatioByVolume"] = _XFinApi_TradeApi.Instrument_SellCloseRatioByVolume_set
+    __swig_getmethods__["SellCloseRatioByVolume"] = _XFinApi_TradeApi.Instrument_SellCloseRatioByVolume_get
+    if _newclass:
+        SellCloseRatioByVolume = _swig_property(_XFinApi_TradeApi.Instrument_SellCloseRatioByVolume_get, _XFinApi_TradeApi.Instrument_SellCloseRatioByVolume_set)
+    __swig_setmethods__["SellCloseTodayRatioByVolume"] = _XFinApi_TradeApi.Instrument_SellCloseTodayRatioByVolume_set
+    __swig_getmethods__["SellCloseTodayRatioByVolume"] = _XFinApi_TradeApi.Instrument_SellCloseTodayRatioByVolume_get
+    if _newclass:
+        SellCloseTodayRatioByVolume = _swig_property(_XFinApi_TradeApi.Instrument_SellCloseTodayRatioByVolume_get, _XFinApi_TradeApi.Instrument_SellCloseTodayRatioByVolume_set)
+    __swig_setmethods__["ObjectPrice"] = _XFinApi_TradeApi.Instrument_ObjectPrice_set
+    __swig_getmethods__["ObjectPrice"] = _XFinApi_TradeApi.Instrument_ObjectPrice_get
+    if _newclass:
+        ObjectPrice = _swig_property(_XFinApi_TradeApi.Instrument_ObjectPrice_get, _XFinApi_TradeApi.Instrument_ObjectPrice_set)
+    __swig_setmethods__["ObjectMarginRatioByMoney"] = _XFinApi_TradeApi.Instrument_ObjectMarginRatioByMoney_set
+    __swig_getmethods__["ObjectMarginRatioByMoney"] = _XFinApi_TradeApi.Instrument_ObjectMarginRatioByMoney_get
+    if _newclass:
+        ObjectMarginRatioByMoney = _swig_property(_XFinApi_TradeApi.Instrument_ObjectMarginRatioByMoney_get, _XFinApi_TradeApi.Instrument_ObjectMarginRatioByMoney_set)
+    __swig_setmethods__["ObjectMarginRatioByVolume"] = _XFinApi_TradeApi.Instrument_ObjectMarginRatioByVolume_set
+    __swig_getmethods__["ObjectMarginRatioByVolume"] = _XFinApi_TradeApi.Instrument_ObjectMarginRatioByVolume_get
+    if _newclass:
+        ObjectMarginRatioByVolume = _swig_property(_XFinApi_TradeApi.Instrument_ObjectMarginRatioByVolume_get, _XFinApi_TradeApi.Instrument_ObjectMarginRatioByVolume_set)
+    __swig_setmethods__["EnsureRatio1"] = _XFinApi_TradeApi.Instrument_EnsureRatio1_set
+    __swig_getmethods__["EnsureRatio1"] = _XFinApi_TradeApi.Instrument_EnsureRatio1_get
+    if _newclass:
+        EnsureRatio1 = _swig_property(_XFinApi_TradeApi.Instrument_EnsureRatio1_get, _XFinApi_TradeApi.Instrument_EnsureRatio1_set)
+    __swig_setmethods__["EnsureRatio2"] = _XFinApi_TradeApi.Instrument_EnsureRatio2_set
+    __swig_getmethods__["EnsureRatio2"] = _XFinApi_TradeApi.Instrument_EnsureRatio2_get
+    if _newclass:
+        EnsureRatio2 = _swig_property(_XFinApi_TradeApi.Instrument_EnsureRatio2_get, _XFinApi_TradeApi.Instrument_EnsureRatio2_set)
 Instrument_swigregister = _XFinApi_TradeApi.Instrument_swigregister
 Instrument_swigregister(Instrument)
 
@@ -2022,6 +2074,10 @@ class Order(_object):
     __swig_getmethods__["OrderLocalNo"] = _XFinApi_TradeApi.Order_OrderLocalNo_get
     if _newclass:
         OrderLocalNo = _swig_property(_XFinApi_TradeApi.Order_OrderLocalNo_get, _XFinApi_TradeApi.Order_OrderLocalNo_set)
+    __swig_setmethods__["OrderCounterNo"] = _XFinApi_TradeApi.Order_OrderCounterNo_set
+    __swig_getmethods__["OrderCounterNo"] = _XFinApi_TradeApi.Order_OrderCounterNo_get
+    if _newclass:
+        OrderCounterNo = _swig_property(_XFinApi_TradeApi.Order_OrderCounterNo_get, _XFinApi_TradeApi.Order_OrderCounterNo_set)
     __swig_setmethods__["Price"] = _XFinApi_TradeApi.Order_Price_set
     __swig_getmethods__["Price"] = _XFinApi_TradeApi.Order_Price_get
     if _newclass:
@@ -2262,6 +2318,22 @@ class Position(_object):
     __swig_getmethods__["YdPosition"] = _XFinApi_TradeApi.Position_YdPosition_get
     if _newclass:
         YdPosition = _swig_property(_XFinApi_TradeApi.Position_YdPosition_get, _XFinApi_TradeApi.Position_YdPosition_set)
+    __swig_setmethods__["ExchangeMargin"] = _XFinApi_TradeApi.Position_ExchangeMargin_set
+    __swig_getmethods__["ExchangeMargin"] = _XFinApi_TradeApi.Position_ExchangeMargin_get
+    if _newclass:
+        ExchangeMargin = _swig_property(_XFinApi_TradeApi.Position_ExchangeMargin_get, _XFinApi_TradeApi.Position_ExchangeMargin_set)
+    __swig_setmethods__["PositionTotal"] = _XFinApi_TradeApi.Position_PositionTotal_set
+    __swig_getmethods__["PositionTotal"] = _XFinApi_TradeApi.Position_PositionTotal_get
+    if _newclass:
+        PositionTotal = _swig_property(_XFinApi_TradeApi.Position_PositionTotal_get, _XFinApi_TradeApi.Position_PositionTotal_set)
+    __swig_setmethods__["PositionSellable"] = _XFinApi_TradeApi.Position_PositionSellable_set
+    __swig_getmethods__["PositionSellable"] = _XFinApi_TradeApi.Position_PositionSellable_get
+    if _newclass:
+        PositionSellable = _swig_property(_XFinApi_TradeApi.Position_PositionSellable_get, _XFinApi_TradeApi.Position_PositionSellable_set)
+    __swig_setmethods__["AvgPrice"] = _XFinApi_TradeApi.Position_AvgPrice_set
+    __swig_getmethods__["AvgPrice"] = _XFinApi_TradeApi.Position_AvgPrice_get
+    if _newclass:
+        AvgPrice = _swig_property(_XFinApi_TradeApi.Position_AvgPrice_get, _XFinApi_TradeApi.Position_AvgPrice_set)
 
     def __init__(self):
         this = _XFinApi_TradeApi.new_Position()
@@ -2308,6 +2380,34 @@ class Account(_object):
     __swig_getmethods__["Deposit"] = _XFinApi_TradeApi.Account_Deposit_get
     if _newclass:
         Deposit = _swig_property(_XFinApi_TradeApi.Account_Deposit_get, _XFinApi_TradeApi.Account_Deposit_set)
+    __swig_setmethods__["StaticBalance"] = _XFinApi_TradeApi.Account_StaticBalance_set
+    __swig_getmethods__["StaticBalance"] = _XFinApi_TradeApi.Account_StaticBalance_get
+    if _newclass:
+        StaticBalance = _swig_property(_XFinApi_TradeApi.Account_StaticBalance_get, _XFinApi_TradeApi.Account_StaticBalance_set)
+    __swig_setmethods__["CloseProfit"] = _XFinApi_TradeApi.Account_CloseProfit_set
+    __swig_getmethods__["CloseProfit"] = _XFinApi_TradeApi.Account_CloseProfit_get
+    if _newclass:
+        CloseProfit = _swig_property(_XFinApi_TradeApi.Account_CloseProfit_get, _XFinApi_TradeApi.Account_CloseProfit_set)
+    __swig_setmethods__["PositionProfit"] = _XFinApi_TradeApi.Account_PositionProfit_set
+    __swig_getmethods__["PositionProfit"] = _XFinApi_TradeApi.Account_PositionProfit_get
+    if _newclass:
+        PositionProfit = _swig_property(_XFinApi_TradeApi.Account_PositionProfit_get, _XFinApi_TradeApi.Account_PositionProfit_set)
+    __swig_setmethods__["Commission"] = _XFinApi_TradeApi.Account_Commission_set
+    __swig_getmethods__["Commission"] = _XFinApi_TradeApi.Account_Commission_get
+    if _newclass:
+        Commission = _swig_property(_XFinApi_TradeApi.Account_Commission_get, _XFinApi_TradeApi.Account_Commission_set)
+    __swig_setmethods__["Balance"] = _XFinApi_TradeApi.Account_Balance_set
+    __swig_getmethods__["Balance"] = _XFinApi_TradeApi.Account_Balance_get
+    if _newclass:
+        Balance = _swig_property(_XFinApi_TradeApi.Account_Balance_get, _XFinApi_TradeApi.Account_Balance_set)
+    __swig_setmethods__["CurrMargin"] = _XFinApi_TradeApi.Account_CurrMargin_set
+    __swig_getmethods__["CurrMargin"] = _XFinApi_TradeApi.Account_CurrMargin_get
+    if _newclass:
+        CurrMargin = _swig_property(_XFinApi_TradeApi.Account_CurrMargin_get, _XFinApi_TradeApi.Account_CurrMargin_set)
+    __swig_setmethods__["MaintenanceMargin"] = _XFinApi_TradeApi.Account_MaintenanceMargin_set
+    __swig_getmethods__["MaintenanceMargin"] = _XFinApi_TradeApi.Account_MaintenanceMargin_get
+    if _newclass:
+        MaintenanceMargin = _swig_property(_XFinApi_TradeApi.Account_MaintenanceMargin_get, _XFinApi_TradeApi.Account_MaintenanceMargin_set)
     __swig_setmethods__["DeliveryMargin"] = _XFinApi_TradeApi.Account_DeliveryMargin_set
     __swig_getmethods__["DeliveryMargin"] = _XFinApi_TradeApi.Account_DeliveryMargin_get
     if _newclass:
@@ -2324,94 +2424,14 @@ class Account(_object):
     __swig_getmethods__["FrozenCash"] = _XFinApi_TradeApi.Account_FrozenCash_get
     if _newclass:
         FrozenCash = _swig_property(_XFinApi_TradeApi.Account_FrozenCash_get, _XFinApi_TradeApi.Account_FrozenCash_set)
-    __swig_setmethods__["CurrMargin"] = _XFinApi_TradeApi.Account_CurrMargin_set
-    __swig_getmethods__["CurrMargin"] = _XFinApi_TradeApi.Account_CurrMargin_get
-    if _newclass:
-        CurrMargin = _swig_property(_XFinApi_TradeApi.Account_CurrMargin_get, _XFinApi_TradeApi.Account_CurrMargin_set)
-    __swig_setmethods__["Commission"] = _XFinApi_TradeApi.Account_Commission_set
-    __swig_getmethods__["Commission"] = _XFinApi_TradeApi.Account_Commission_get
-    if _newclass:
-        Commission = _swig_property(_XFinApi_TradeApi.Account_Commission_get, _XFinApi_TradeApi.Account_Commission_set)
-    __swig_setmethods__["CloseProfit"] = _XFinApi_TradeApi.Account_CloseProfit_set
-    __swig_getmethods__["CloseProfit"] = _XFinApi_TradeApi.Account_CloseProfit_get
-    if _newclass:
-        CloseProfit = _swig_property(_XFinApi_TradeApi.Account_CloseProfit_get, _XFinApi_TradeApi.Account_CloseProfit_set)
-    __swig_setmethods__["PositionProfit"] = _XFinApi_TradeApi.Account_PositionProfit_set
-    __swig_getmethods__["PositionProfit"] = _XFinApi_TradeApi.Account_PositionProfit_get
-    if _newclass:
-        PositionProfit = _swig_property(_XFinApi_TradeApi.Account_PositionProfit_get, _XFinApi_TradeApi.Account_PositionProfit_set)
-    __swig_setmethods__["Available"] = _XFinApi_TradeApi.Account_Available_set
-    __swig_getmethods__["Available"] = _XFinApi_TradeApi.Account_Available_get
-    if _newclass:
-        Available = _swig_property(_XFinApi_TradeApi.Account_Available_get, _XFinApi_TradeApi.Account_Available_set)
-    __swig_setmethods__["Balance"] = _XFinApi_TradeApi.Account_Balance_set
-    __swig_getmethods__["Balance"] = _XFinApi_TradeApi.Account_Balance_get
-    if _newclass:
-        Balance = _swig_property(_XFinApi_TradeApi.Account_Balance_get, _XFinApi_TradeApi.Account_Balance_set)
-    __swig_setmethods__["StaticRights"] = _XFinApi_TradeApi.Account_StaticRights_set
-    __swig_getmethods__["StaticRights"] = _XFinApi_TradeApi.Account_StaticRights_get
-    if _newclass:
-        StaticRights = _swig_property(_XFinApi_TradeApi.Account_StaticRights_get, _XFinApi_TradeApi.Account_StaticRights_set)
-    __swig_setmethods__["ChangingRights"] = _XFinApi_TradeApi.Account_ChangingRights_set
-    __swig_getmethods__["ChangingRights"] = _XFinApi_TradeApi.Account_ChangingRights_get
-    if _newclass:
-        ChangingRights = _swig_property(_XFinApi_TradeApi.Account_ChangingRights_get, _XFinApi_TradeApi.Account_ChangingRights_set)
-    __swig_setmethods__["NetAssetValue"] = _XFinApi_TradeApi.Account_NetAssetValue_set
-    __swig_getmethods__["NetAssetValue"] = _XFinApi_TradeApi.Account_NetAssetValue_get
-    if _newclass:
-        NetAssetValue = _swig_property(_XFinApi_TradeApi.Account_NetAssetValue_get, _XFinApi_TradeApi.Account_NetAssetValue_set)
     __swig_setmethods__["CreditLimit"] = _XFinApi_TradeApi.Account_CreditLimit_set
     __swig_getmethods__["CreditLimit"] = _XFinApi_TradeApi.Account_CreditLimit_get
     if _newclass:
         CreditLimit = _swig_property(_XFinApi_TradeApi.Account_CreditLimit_get, _XFinApi_TradeApi.Account_CreditLimit_set)
-    __swig_setmethods__["CashBal"] = _XFinApi_TradeApi.Account_CashBal_set
-    __swig_getmethods__["CashBal"] = _XFinApi_TradeApi.Account_CashBal_get
+    __swig_setmethods__["Available"] = _XFinApi_TradeApi.Account_Available_set
+    __swig_getmethods__["Available"] = _XFinApi_TradeApi.Account_Available_get
     if _newclass:
-        CashBal = _swig_property(_XFinApi_TradeApi.Account_CashBal_get, _XFinApi_TradeApi.Account_CashBal_set)
-    __swig_setmethods__["IMargin"] = _XFinApi_TradeApi.Account_IMargin_set
-    __swig_getmethods__["IMargin"] = _XFinApi_TradeApi.Account_IMargin_get
-    if _newclass:
-        IMargin = _swig_property(_XFinApi_TradeApi.Account_IMargin_get, _XFinApi_TradeApi.Account_IMargin_set)
-    __swig_setmethods__["MMargin"] = _XFinApi_TradeApi.Account_MMargin_set
-    __swig_getmethods__["MMargin"] = _XFinApi_TradeApi.Account_MMargin_get
-    if _newclass:
-        MMargin = _swig_property(_XFinApi_TradeApi.Account_MMargin_get, _XFinApi_TradeApi.Account_MMargin_set)
-    __swig_setmethods__["CommodityPL"] = _XFinApi_TradeApi.Account_CommodityPL_set
-    __swig_getmethods__["CommodityPL"] = _XFinApi_TradeApi.Account_CommodityPL_get
-    if _newclass:
-        CommodityPL = _swig_property(_XFinApi_TradeApi.Account_CommodityPL_get, _XFinApi_TradeApi.Account_CommodityPL_set)
-    __swig_setmethods__["PreEquity"] = _XFinApi_TradeApi.Account_PreEquity_set
-    __swig_getmethods__["PreEquity"] = _XFinApi_TradeApi.Account_PreEquity_get
-    if _newclass:
-        PreEquity = _swig_property(_XFinApi_TradeApi.Account_PreEquity_get, _XFinApi_TradeApi.Account_PreEquity_set)
-    __swig_setmethods__["PreAvailable"] = _XFinApi_TradeApi.Account_PreAvailable_set
-    __swig_getmethods__["PreAvailable"] = _XFinApi_TradeApi.Account_PreAvailable_get
-    if _newclass:
-        PreAvailable = _swig_property(_XFinApi_TradeApi.Account_PreAvailable_get, _XFinApi_TradeApi.Account_PreAvailable_set)
-    __swig_setmethods__["PreMarketEquity"] = _XFinApi_TradeApi.Account_PreMarketEquity_set
-    __swig_getmethods__["PreMarketEquity"] = _XFinApi_TradeApi.Account_PreMarketEquity_get
-    if _newclass:
-        PreMarketEquity = _swig_property(_XFinApi_TradeApi.Account_PreMarketEquity_get, _XFinApi_TradeApi.Account_PreMarketEquity_set)
-    __swig_setmethods__["AccountIntialMargin"] = _XFinApi_TradeApi.Account_AccountIntialMargin_set
-    __swig_getmethods__["AccountIntialMargin"] = _XFinApi_TradeApi.Account_AccountIntialMargin_get
-    if _newclass:
-        AccountIntialMargin = _swig_property(_XFinApi_TradeApi.Account_AccountIntialMargin_get, _XFinApi_TradeApi.Account_AccountIntialMargin_set)
-    __swig_setmethods__["AccountMaintenanceMargin"] = _XFinApi_TradeApi.Account_AccountMaintenanceMargin_set
-    __swig_getmethods__["AccountMaintenanceMargin"] = _XFinApi_TradeApi.Account_AccountMaintenanceMargin_get
-    if _newclass:
-        AccountMaintenanceMargin = _swig_property(_XFinApi_TradeApi.Account_AccountMaintenanceMargin_get, _XFinApi_TradeApi.Account_AccountMaintenanceMargin_set)
-    __swig_setmethods__["Equity"] = _XFinApi_TradeApi.Account_Equity_set
-    __swig_getmethods__["Equity"] = _XFinApi_TradeApi.Account_Equity_get
-    if _newclass:
-        Equity = _swig_property(_XFinApi_TradeApi.Account_Equity_get, _XFinApi_TradeApi.Account_Equity_set)
-    __swig_setmethods__["CanDraw"] = _XFinApi_TradeApi.Account_CanDraw_set
-    __swig_getmethods__["CanDraw"] = _XFinApi_TradeApi.Account_CanDraw_get
-    if _newclass:
-        CanDraw = _swig_property(_XFinApi_TradeApi.Account_CanDraw_get, _XFinApi_TradeApi.Account_CanDraw_set)
-    __swig_setmethods__["MarketEquity"] = _XFinApi_TradeApi.Account_MarketEquity_set
-    __swig_getmethods__["MarketEquity"] = _XFinApi_TradeApi.Account_MarketEquity_get
-    if _newclass:
-        MarketEquity = _swig_property(_XFinApi_TradeApi.Account_MarketEquity_get, _XFinApi_TradeApi.Account_MarketEquity_set)
+        Available = _swig_property(_XFinApi_TradeApi.Account_Available_get, _XFinApi_TradeApi.Account_Available_set)
     __swig_setmethods__["CurrencyNo"] = _XFinApi_TradeApi.Account_CurrencyNo_set
     __swig_getmethods__["CurrencyNo"] = _XFinApi_TradeApi.Account_CurrencyNo_get
     if _newclass:

@@ -80,7 +80,7 @@ public:
 		UserName = "119486";//公用测试账户。为了测试准确，请注册使用您自己的账户。
 		Password = "a123456";
 
-		InstrumentID = "au1812";
+		InstrumentID = "au1912";
 	}
 
 	void SetNonTradeTime()

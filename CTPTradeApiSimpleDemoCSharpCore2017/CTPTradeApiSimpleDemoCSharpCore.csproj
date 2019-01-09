@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Prefer32Bit>true</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <Prefer32Bit>true</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy $(SolutionDir)..\XTA_W32\Api\CTP_v6.3.6_20160606 $(OutDir)XTA_W32\Api\CTP_v6.3.6_20160606 /I /E /Y&#xD;&#xA;xcopy $(SolutionDir)..\XTA_W32\CSharpCore\XFinApi.ITradeApi.PortCS.dll $(OutDir) /Y" />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="XFinApi.ITradeApi.DriverCS">
+      <HintPath>..\XTA_W32\CSharp\XFinApi.ITradeApi.DriverCS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

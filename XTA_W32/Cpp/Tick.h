@@ -13,7 +13,20 @@ namespace TradeApi
     class Tick
     {
     public:
+        Tick()
+        {
+            for (auto &elem : BidPrice)
+                elem = DOUBLE_DEFAULT;
+            for (auto &elem : AskPrice)
+                elem = DOUBLE_DEFAULT;
+            for (auto &elem : BidVolume)
+                elem = INT64_DEFAULT;
+            for (auto &elem : AskVolume)
+                elem = INT64_DEFAULT;
+        }
+
 		virtual ~Tick() {};
+
         // 合约代码
         std::string InstrumentID;
         // 交易所代码
@@ -116,6 +129,8 @@ namespace TradeApi
         int OpenRestriction = INT32_DEFAULT;
 		// 业务日期
 		std::string ActionDay;
+		// 交易状态
+		InstrumentStatusKind InstrumentStatus = InstrumentStatusKind::Unknown;
 
     public:
         double GetBidPrice(int idx)

@@ -1,0 +1,32 @@
+<Group Name="src">
+	<Src>main.cpp</Src>
+</Group>
+
+<Target Toolchain="linux_x64_exe"
+		TargetDir="./bin/linux_x64/" TargetName="CTPTradeApiSimpleDemoLinux64GCC">
+
+	<Group>src</Group>
+
+	<Flags>
+		-I.
+		$(META:ITradeApi.includes)
+		$(META:main.flags)
+	</Flags>
+	
+	<LinkFlags>
+		-rpath=./
+		$(META:main.linkflags)
+	</LinkFlags>
+	
+	<Reference Package="../../../ITradeApi" Target="linux_x64_so" Binary="true" Copy="true" />
+
+	<Meta Name="main.flags">-Ofast -flto</Meta>
+	<Meta Name="main.linkflags">--strip-all</Meta>
+</Target>
+
+<Target Base="linux_x64_exe" Toolchain="linux_x64_exe_debug"
+		TargetDir="./bin/linux_x64-d/" TargetName="$(BASE)">
+	<Reference Package="../../../ITradeApi" Target="linux_x64_so_debug" Binary="true" Copy="true" />
+	<Meta Name="main.flags">-O0</Meta>
+	<Meta Name="main.linkflags"></Meta>
+</Target>
