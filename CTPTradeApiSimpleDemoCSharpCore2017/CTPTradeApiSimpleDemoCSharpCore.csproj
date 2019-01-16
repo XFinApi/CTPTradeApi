@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <Reference Include="XFinApi.ITradeApi.DriverCS">
-      <HintPath>..\XTA_W32\CSharp\XFinApi.ITradeApi.DriverCS.dll</HintPath>
+      <HintPath>..\XTA_W32\CSharpCore\XFinApi.ITradeApi.DriverCS.dll</HintPath>
     </Reference>
   </ItemGroup>
 
