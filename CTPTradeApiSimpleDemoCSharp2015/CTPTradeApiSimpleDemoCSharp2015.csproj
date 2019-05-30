@@ -45,6 +45,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy $(SolutionDir)..\XTA_W32\Api\CTP_v6.3.6_20160606 XTA_W32\Api\CTP_v6.3.6_20160606 /I /E /Y
+xcopy $(SolutionDir)..\XTA_W32\Api\CTP_v6.3.13_20181119 XTA_W32\Api\CTP_v6.3.13_20181119 /I /E /Y
+xcopy $(SolutionDir)..\XTA_W32\Api\CTP_v6.3.15_20190220 XTA_W32\Api\CTP_v6.3.15_20190220 /I /E /Y
 copy $(SolutionDir)..\XTA_W32\CSharp\XFinApi.ITradeApi.PortCS.dll XFinApi.ITradeApi.PortCS.dll /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

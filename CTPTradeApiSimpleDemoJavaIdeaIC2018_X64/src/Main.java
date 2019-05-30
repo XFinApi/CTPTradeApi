@@ -3,6 +3,8 @@
  * www.xfinapi.com
  *******************************************************/
 
+import XFinApi.TradeApi.*;
+
 import java.util.*;
 
 public class Main {
@@ -19,7 +21,7 @@ public class Main {
         public String Password = "a123456";
 
         //合约
-        public String InstrumentID = "au1812";
+        public String InstrumentID = "IH1912";
 
         //行情
         public double SellPrice1 = -1;
@@ -33,8 +35,31 @@ public class Main {
         }
     }
 
+	public static class ConfigSE {
+         //地址
+		public String MarketAddress = "";
+		public String TradeAddress = "";
+		//注册CTP仿真交易账号，www.simnow.com.cn
+		//账户
+		public String BrokerID = "";
+		public String UserName = "";
+		public String Password = "";
+
+		//看穿式监管认证信息
+		public String AppID = "";
+		public String AuthCode = "";
+
+		////合约
+		//public String InstrumentID = "IH1912";
+
+		////行情
+		//public double SellPrice1 = -1;
+		//public double BuyPrice1 = -1;
+    }
+
     //////////////////////////////////////////////////////////////////////////////////
     static Config Cfg = new Config();
+	static ConfigSE CfgSE = new ConfigSE();
     static XFinApi.TradeApi.IMarket market;
     static XFinApi.TradeApi.ITrade trade;
     static MarketEvent marketEvent;
@@ -289,15 +314,16 @@ public class Main {
 
     //////////////////////////////////////////////////////////////////////////////////
     //行情测试
-    static void MarketTest() {
-        //创建 IMarket
+    static boolean  CreateAndOpenMarket6()
+	{
+		//创建 IMarket
         // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
         int[] err = new int[1];
 
         market = XFinApi.TradeApi.ITradeApi.XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", err);
         if (err[0] > 0 && market == null) {
             System.out.println(String.format("* Market XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
-            return;
+            return false;
         }
 
         //注册事件
@@ -313,6 +339,73 @@ public class Main {
         openParams.setPassword(Cfg.Password);
         openParams.setIsUTF8(true);
         market.Open(openParams);
+		
+		return true;
+	}
+	
+	static boolean  CreateAndOpenMarket13()
+	{
+		//创建 IMarket
+        // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+        int[] err = new int[1];
+
+        market = XFinApi.TradeApi.ITradeApi.XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", err);
+        if (err[0] > 0 && market == null) {
+            System.out.println(String.format("* Market XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
+            return false;
+        }
+
+        //注册事件
+        marketEvent = new MarketEvent();
+        market.SetListener(marketEvent);
+
+        //连接服务器
+        XFinApi.TradeApi.OpenParams openParams = new XFinApi.TradeApi.OpenParams();
+        openParams.setHostAddress(CfgSE.MarketAddress);
+        openParams.setBrokerID(CfgSE.BrokerID);
+        openParams.setUserID(CfgSE.UserName);
+        openParams.setPassword(CfgSE.Password);
+        openParams.setIsUTF8(true);
+        market.Open(openParams);
+		
+		return true;
+	}
+	
+	static boolean  CreateAndOpenMarket15()
+	{
+		//创建 IMarket
+        // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+        int[] err = new int[1];
+
+        market = XFinApi.TradeApi.ITradeApi.XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", err);
+        if (err[0] > 0 && market == null) {
+            System.out.println(String.format("* Market XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
+            return false;
+        }
+
+        //注册事件
+        marketEvent = new MarketEvent();
+        market.SetListener(marketEvent);
+
+        //连接服务器
+        XFinApi.TradeApi.OpenParams openParams = new XFinApi.TradeApi.OpenParams();
+        openParams.setHostAddress(CfgSE.MarketAddress);
+        openParams.setBrokerID(CfgSE.BrokerID);
+        openParams.setUserID(CfgSE.UserName);
+        openParams.setPassword(CfgSE.Password);
+        openParams.setIsUTF8(true);
+        market.Open(openParams);
+		
+		return true;
+	}
+    static void MarketTest() {
+        
+		    if (!CreateAndOpenMarket6()) //CTP_v6.3.6_20160606版本
+                return;
+            //if (!CreateAndOpenMarket13()) //CTP_v6.3.13_20181119版本
+            //    return;
+            //if (!CreateAndOpenMarket15()) //CTP_v6.3.15_20190220版本
+            //    return;
 
             /*
             连接成功后才能执行订阅行情等操作，检测方法有两种：
@@ -339,8 +432,9 @@ public class Main {
     //////////////////////////////////////////////////////////////////////////////////
     //交易测试
 
-    static void TradeTest() {
-        //创建 ITrade
+	static boolean CreateAndOpenTrade6()
+	{
+		//创建 ITrade
         // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
         int[] err = new int[1];
 
@@ -348,7 +442,7 @@ public class Main {
 
         if (trade == null) {
             System.out.println(String.format("* Trade XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
-            return;
+            return false;
         }
 
         //注册事件
@@ -365,6 +459,86 @@ public class Main {
         openParams.setPassword(Cfg.Password);
         openParams.setIsUTF8(true);
         trade.Open(openParams);
+		
+		return true;
+	}
+	
+	static boolean CreateAndOpenTrade13()
+	{
+		//创建 ITrade
+        // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+        int[] err = new int[1];
+
+        trade = XFinApi.TradeApi.ITradeApi.XFinApi_CreateTradeApi("XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", err);
+
+        if (trade == null) {
+            System.out.println(String.format("* Trade XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
+            return false;
+        }
+
+        //注册事件
+        tradeEvent = new TradeEvent();
+
+        trade.SetListener(tradeEvent);
+
+        //连接服务器
+        //Cfg.SetNonTradeTime();//非交易时段
+        XFinApi.TradeApi.OpenParams openParams = new XFinApi.TradeApi.OpenParams();
+        openParams.setHostAddress(CfgSE.TradeAddress);
+        openParams.setBrokerID(CfgSE.BrokerID);
+        openParams.setUserID(CfgSE.UserName);
+        openParams.setPassword(CfgSE.Password);
+		StdStringMap cfgs = new StdStringMap();
+		cfgs.set("AuthCode", CfgSE.AuthCode);
+        cfgs.set("AppID", CfgSE.AppID);
+        openParams.setConfigs(cfgs);
+        openParams.setIsUTF8(true);
+        trade.Open(openParams);
+		
+		return true;
+	}
+	static boolean CreateAndOpenTrade15()
+	{
+		//创建 ITrade
+        // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+        int[] err = new int[1];
+
+        trade = XFinApi.TradeApi.ITradeApi.XFinApi_CreateTradeApi("XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", err);
+
+        if (trade == null) {
+            System.out.println(String.format("* Trade XFinApiCreateError=%s;", StrCreateErrors[err[0]]));
+            return false;
+        }
+
+        //注册事件
+        tradeEvent = new TradeEvent();
+
+        trade.SetListener(tradeEvent);
+
+        //连接服务器
+        //Cfg.SetNonTradeTime();//非交易时段
+        XFinApi.TradeApi.OpenParams openParams = new XFinApi.TradeApi.OpenParams();
+        openParams.setHostAddress(CfgSE.TradeAddress);
+        openParams.setBrokerID(CfgSE.BrokerID);
+        openParams.setUserID(CfgSE.UserName);
+        openParams.setPassword(CfgSE.Password);
+		StdStringMap cfgs = new StdStringMap();
+		cfgs.set("AuthCode", CfgSE.AuthCode);
+        cfgs.set("AppID", CfgSE.AppID);
+        openParams.setConfigs(cfgs);
+        openParams.setIsUTF8(true);
+        trade.Open(openParams);
+		
+		return true;
+	}
+	
+    static void TradeTest() {
+        if (!CreateAndOpenTrade6()) //CTP_v6.3.6_20160606版本
+		    return;
+		//if (!CreateAndOpenTrade13()) //CTP_v6.3.13_20181119版本
+		//	return;
+		//if (!CreateAndOpenTrade15()) //CTP_v6.3.15_20190220版本
+		//    return;
 
             /*
             //连接成功后才能执行查询、委托等操作，检测方法有两种：

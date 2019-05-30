@@ -47,6 +47,13 @@ debug使用：XFinApi.ITradeApid.lib
 
 #include "XFinApi.h"
 
+/*
+CTP接口的不同版本
+_CTP_: 6.3.6版本
+_CTPSE13_: 6.3.13版本
+_CTPSE15_: 6.3.15版本
+*/
+#define _CTP_ 
 //////////////////////////////////////////////////////////////////////////////////
 //配置信息
 class Config
@@ -68,27 +75,46 @@ public:
 	double SellPrice1 = -1;
 	double BuyPrice1 = -1;
 
+	//看穿式监管认证信息
+	std::string AppID;
+	std::string AuthCode;
+
 	Config()
 	{
 		//注册CTP仿真交易账号，www.simnow.com.cn
 
 		//交易时段
+#ifdef _CTP_
+		//非看穿式监管
 		MarketAddress = "180.168.146.187:10010";
 		TradeAddress = "180.168.146.187:10000";
 
 		BrokerID = "9999";
 		UserName = "119486";//公用测试账户。为了测试准确，请注册使用您自己的账户。
 		Password = "a123456";
+#else
+		//看穿式监管
+		MarketAddress = "";
+		TradeAddress = "";
 
-		InstrumentID = "au1912";
+		BrokerID = "";
+		UserName = "";
+		Password = "";
+		AppID = "";
+		AuthCode = "";
+#endif
+
+		InstrumentID = "IH1912";
 	}
 
 	void SetNonTradeTime()
 	{
 		//非交易时间
 		//下午收盘后，或放假时间
+#ifdef _CTP_
 		MarketAddress = "180.168.146.187:10031";
 		TradeAddress = "180.168.146.187:10030";
+#endif
 	}
 };
 
@@ -388,6 +414,8 @@ void MarketTest()
 	//创建 IMarket
 	//const char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
 	int err = -1;
+
+#ifdef _CTP_
 #ifdef _DEBUG
 #ifdef _WIN64
 	market = XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApid.dll", &err);
@@ -401,6 +429,39 @@ void MarketTest()
 	market = XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", &err);
 #endif // _WIN64
 #endif
+#endif // _CTP_
+
+#ifdef _CTPSE13_
+#ifdef _DEBUG
+#ifdef _WIN64
+	market = XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSEd.dll", &err);
+#else
+	market = XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSEd.dll", &err);
+#endif // _WIN64
+#else
+#ifdef _WIN64
+	market = XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", &err);
+#else
+	market = XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", &err);
+#endif // _WIN64
+#endif
+#endif // _CTPSE13_
+
+#ifdef _CTPSE15_
+#ifdef _DEBUG
+#ifdef _WIN64
+	market = XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSEd.dll", &err);
+#else
+	market = XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSEd.dll", &err);
+#endif // _WIN64
+#else
+#ifdef _WIN64
+	market = XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", &err);
+#else
+	market = XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", &err);
+#endif // _WIN64
+#endif
+#endif // _CTPSE15_
 
 	if (err || !market)
 	{
@@ -450,6 +511,8 @@ void TradeTest()
 	//创建 ITrade
 	//const char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
 	int err = -1;
+
+#ifdef _CTP_
 #ifdef _DEBUG
 #ifdef _WIN64
 	trade = XFinApi_CreateTradeApi("XTA_W64/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApid.dll", &err);
@@ -463,6 +526,40 @@ void TradeTest()
 	trade = XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", &err);
 #endif // _WIN64
 #endif
+#endif // _CTP_
+
+#ifdef _CTPSE13_
+#ifdef _DEBUG
+#ifdef _WIN64
+	trade = XFinApi_CreateTradeApi("XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSEd.dll", &err);
+#else
+	trade = XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSEd.dll", &err);
+#endif // _WIN64
+#else
+#ifdef _WIN64
+	trade = XFinApi_CreateTradeApi("XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", &err);
+#else
+	trade = XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", &err);
+#endif // _WIN64
+#endif
+#endif // _CTPSE13_
+
+#ifdef _CTPSE15_
+#ifdef _DEBUG
+#ifdef _WIN64
+	trade = XFinApi_CreateTradeApi("XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSEd.dll", &err);
+#else
+	trade = XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSEd.dll", &err);
+#endif // _WIN64
+#else
+#ifdef _WIN64
+	trade = XFinApi_CreateTradeApi("XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", &err);
+#else
+	trade = XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", &err);
+#endif // _WIN64
+#endif
+#endif // _CTPSE15_
+
 	if (err || !trade)
 	{
 		printf("* Trade XFinApiCreateError=%s;\n", StrCreateErrors[err]);
@@ -480,6 +577,8 @@ void TradeTest()
 	openParams.BrokerID = Cfg.BrokerID;
 	openParams.UserID = Cfg.UserName;
 	openParams.Password = Cfg.Password;
+	openParams.Configs.insert(std::make_pair("AppID", Cfg.AppID));
+	openParams.Configs.insert(std::make_pair("AuthCode", Cfg.AuthCode));
 	trade->Open(openParams);
 
 	/*
@@ -551,7 +650,21 @@ void TradeTest()
 
 int main()
 {
-	//可在Config类中修改用户名、密码、合约等信息
+	//请先在Config类中设置地址、BrokerID、用户名、密码等信息
+	if (Cfg.TradeAddress == "" || Cfg.MarketAddress == "" || Cfg.BrokerID == "" ||
+		Cfg.UserName == "" || Cfg.Password == "")
+	{
+		std::cout << "请先在Config类中设置地址账户等信息.\n";
+		getchar();
+	}
+
+#ifndef _CTP_
+	if (Cfg.AppID == "" || Cfg.AuthCode == "")
+	{
+		std::cout << "请先在Config类中设置看穿式监管认证信息.\n";
+		getchar();
+	}
+#endif // !_CTP_
 
 	MarketTest();
 	TradeTest();

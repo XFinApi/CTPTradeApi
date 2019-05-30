@@ -963,7 +963,24 @@ InstrumentStatusKind_Continous = _XFinApi_TradeApi.InstrumentStatusKind_Continou
 InstrumentStatusKind_AuctionOrdering = _XFinApi_TradeApi.InstrumentStatusKind_AuctionOrdering
 InstrumentStatusKind_AuctionBalance = _XFinApi_TradeApi.InstrumentStatusKind_AuctionBalance
 InstrumentStatusKind_AuctionMatch = _XFinApi_TradeApi.InstrumentStatusKind_AuctionMatch
+InstrumentStatusKind_Pause = _XFinApi_TradeApi.InstrumentStatusKind_Pause
 InstrumentStatusKind_Closed = _XFinApi_TradeApi.InstrumentStatusKind_Closed
+InstrumentStatusKind_ClosingCallAuction = _XFinApi_TradeApi.InstrumentStatusKind_ClosingCallAuction
+InstrumentStatusKind_Fusing = _XFinApi_TradeApi.InstrumentStatusKind_Fusing
+InstrumentStatusKind_Halt = _XFinApi_TradeApi.InstrumentStatusKind_Halt
+InstrumentStatusKind_HaltAllDay = _XFinApi_TradeApi.InstrumentStatusKind_HaltAllDay
+InstrumentStatusKind_FuseToCallAuction = _XFinApi_TradeApi.InstrumentStatusKind_FuseToCallAuction
+InstrumentStatusKind_FuseToClose = _XFinApi_TradeApi.InstrumentStatusKind_FuseToClose
+InstrumentStatusKind_Unknown = _XFinApi_TradeApi.InstrumentStatusKind_Unknown
+CloseStyleTypeKind_Close = _XFinApi_TradeApi.CloseStyleTypeKind_Close
+CloseStyleTypeKind_CloseToday = _XFinApi_TradeApi.CloseStyleTypeKind_CloseToday
+CloseStyleTypeKind_CloseYesteryDay = _XFinApi_TradeApi.CloseStyleTypeKind_CloseYesteryDay
+UserRightTypeKind_PreSettlementPrice = _XFinApi_TradeApi.UserRightTypeKind_PreSettlementPrice
+UserRightTypeKind_LastPrice = _XFinApi_TradeApi.UserRightTypeKind_LastPrice
+UserRightTypeKind_AveragePrice = _XFinApi_TradeApi.UserRightTypeKind_AveragePrice
+UserRightTypeKind_OpenPrice = _XFinApi_TradeApi.UserRightTypeKind_OpenPrice
+PositionTypeKind_Net = _XFinApi_TradeApi.PositionTypeKind_Net
+PositionTypeKind_Gross = _XFinApi_TradeApi.PositionTypeKind_Gross
 class OpenParams(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, OpenParams, name, value)
@@ -1445,6 +1462,10 @@ class Tick(_object):
     __swig_getmethods__["ActionDay"] = _XFinApi_TradeApi.Tick_ActionDay_get
     if _newclass:
         ActionDay = _swig_property(_XFinApi_TradeApi.Tick_ActionDay_get, _XFinApi_TradeApi.Tick_ActionDay_set)
+    __swig_setmethods__["InstrumentStatus"] = _XFinApi_TradeApi.Tick_InstrumentStatus_set
+    __swig_getmethods__["InstrumentStatus"] = _XFinApi_TradeApi.Tick_InstrumentStatus_get
+    if _newclass:
+        InstrumentStatus = _swig_property(_XFinApi_TradeApi.Tick_InstrumentStatus_get, _XFinApi_TradeApi.Tick_InstrumentStatus_set)
 
     def GetBidPrice(self, idx: 'int') -> "double":
         return _XFinApi_TradeApi.Tick_GetBidPrice(self, idx)
@@ -1915,6 +1936,30 @@ class Instrument(_object):
     __swig_getmethods__["EnsureRatio2"] = _XFinApi_TradeApi.Instrument_EnsureRatio2_get
     if _newclass:
         EnsureRatio2 = _swig_property(_XFinApi_TradeApi.Instrument_EnsureRatio2_get, _XFinApi_TradeApi.Instrument_EnsureRatio2_set)
+    __swig_setmethods__["CloseStyleType"] = _XFinApi_TradeApi.Instrument_CloseStyleType_set
+    __swig_getmethods__["CloseStyleType"] = _XFinApi_TradeApi.Instrument_CloseStyleType_get
+    if _newclass:
+        CloseStyleType = _swig_property(_XFinApi_TradeApi.Instrument_CloseStyleType_get, _XFinApi_TradeApi.Instrument_CloseStyleType_set)
+    __swig_setmethods__["IsCloseToday"] = _XFinApi_TradeApi.Instrument_IsCloseToday_set
+    __swig_getmethods__["IsCloseToday"] = _XFinApi_TradeApi.Instrument_IsCloseToday_get
+    if _newclass:
+        IsCloseToday = _swig_property(_XFinApi_TradeApi.Instrument_IsCloseToday_get, _XFinApi_TradeApi.Instrument_IsCloseToday_set)
+    __swig_setmethods__["TodayUserRightType"] = _XFinApi_TradeApi.Instrument_TodayUserRightType_set
+    __swig_getmethods__["TodayUserRightType"] = _XFinApi_TradeApi.Instrument_TodayUserRightType_get
+    if _newclass:
+        TodayUserRightType = _swig_property(_XFinApi_TradeApi.Instrument_TodayUserRightType_get, _XFinApi_TradeApi.Instrument_TodayUserRightType_set)
+    __swig_setmethods__["YesterdayUserRightType"] = _XFinApi_TradeApi.Instrument_YesterdayUserRightType_set
+    __swig_getmethods__["YesterdayUserRightType"] = _XFinApi_TradeApi.Instrument_YesterdayUserRightType_get
+    if _newclass:
+        YesterdayUserRightType = _swig_property(_XFinApi_TradeApi.Instrument_YesterdayUserRightType_get, _XFinApi_TradeApi.Instrument_YesterdayUserRightType_set)
+    __swig_setmethods__["SelfClosingCount"] = _XFinApi_TradeApi.Instrument_SelfClosingCount_set
+    __swig_getmethods__["SelfClosingCount"] = _XFinApi_TradeApi.Instrument_SelfClosingCount_get
+    if _newclass:
+        SelfClosingCount = _swig_property(_XFinApi_TradeApi.Instrument_SelfClosingCount_get, _XFinApi_TradeApi.Instrument_SelfClosingCount_set)
+    __swig_setmethods__["SelfClosingVolume"] = _XFinApi_TradeApi.Instrument_SelfClosingVolume_set
+    __swig_getmethods__["SelfClosingVolume"] = _XFinApi_TradeApi.Instrument_SelfClosingVolume_get
+    if _newclass:
+        SelfClosingVolume = _swig_property(_XFinApi_TradeApi.Instrument_SelfClosingVolume_get, _XFinApi_TradeApi.Instrument_SelfClosingVolume_set)
 Instrument_swigregister = _XFinApi_TradeApi.Instrument_swigregister
 Instrument_swigregister(Instrument)
 
@@ -2244,6 +2289,10 @@ class TradeOrder(_object):
     __swig_getmethods__["Commission"] = _XFinApi_TradeApi.TradeOrder_Commission_get
     if _newclass:
         Commission = _swig_property(_XFinApi_TradeApi.TradeOrder_Commission_get, _XFinApi_TradeApi.TradeOrder_Commission_set)
+    __swig_setmethods__["IsSelfClosing"] = _XFinApi_TradeApi.TradeOrder_IsSelfClosing_set
+    __swig_getmethods__["IsSelfClosing"] = _XFinApi_TradeApi.TradeOrder_IsSelfClosing_get
+    if _newclass:
+        IsSelfClosing = _swig_property(_XFinApi_TradeApi.TradeOrder_IsSelfClosing_get, _XFinApi_TradeApi.TradeOrder_IsSelfClosing_set)
 
     def __init__(self):
         this = _XFinApi_TradeApi.new_TradeOrder()

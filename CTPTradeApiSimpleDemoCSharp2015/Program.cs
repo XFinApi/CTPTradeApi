@@ -26,7 +26,7 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             public string Password = "a123456";
 
             //合约
-            public string InstrumentID = "au1912";
+            public string InstrumentID = "IH1912";
 
             //行情
             public double SellPrice1 = -1;
@@ -41,9 +41,34 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             }
         };
 
+        class ConfigSE
+        {
+            //地址
+            public string MarketAddress = "";
+            public string TradeAddress = "";
+            //注册CTP仿真交易账号，www.simnow.com.cn
+            //账户
+            public string BrokerID = "";
+            public string UserName = "";
+            public string Password = "";
+
+            //看穿式监管认证信息
+            public string AppID = "";
+            public string AuthCode = "";
+
+            ////合约
+            //public string InstrumentID = "IH1912";
+
+            ////行情
+            //public double SellPrice1 = -1;
+            //public double BuyPrice1 = -1;
+
+        };
+
         //////////////////////////////////////////////////////////////////////////////////
         // 变量
         static Config Cfg = new Config();
+        static ConfigSE CfgSE = new ConfigSE();
         static IMarket market;
         static ITrade trade;
         static MarketEvent marketEvent;
@@ -316,7 +341,7 @@ namespace CTPTradeApiSimpleDemoCSharp2015
 
         //////////////////////////////////////////////////////////////////////////////////
         //行情测试
-        static void MarketTest()
+        static bool  CreateAndOpenMarket6()
         {
             //创建 IMarket
             // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
@@ -324,11 +349,10 @@ namespace CTPTradeApiSimpleDemoCSharp2015
 
             market = ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll", out err);
 
-
             if (err > 0 || market == null)
             {
                 Console.WriteLine(string.Format("* Market XFinApiCreateError={0};", StrCreateErrors[err]));
-                return;
+                return false;
             }
 
             //注册事件
@@ -344,6 +368,77 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             openParams.Password = Cfg.Password;
             openParams.IsUTF8 = true;
             market.Open(openParams);
+
+            return true;
+        }
+
+        static bool CreateAndOpenMarket13()
+        {
+            //创建 IMarket
+            // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+            int err = -1;
+
+            market = ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", out err);
+
+            if (err > 0 || market == null)
+            {
+                Console.WriteLine(string.Format("* Market XFinApiCreateError={0};", StrCreateErrors[err]));
+                return false;
+            }
+
+            //注册事件
+            marketEvent = new MarketEvent();
+            market.SetListener(marketEvent);
+
+            //连接服务器
+            OpenParams openParams = new OpenParams();
+            openParams.HostAddress = CfgSE.MarketAddress;
+            openParams.BrokerID = CfgSE.BrokerID;
+            openParams.UserID = CfgSE.UserName;
+            openParams.Password = CfgSE.Password;
+            openParams.IsUTF8 = true;
+            market.Open(openParams);
+
+            return true;
+        }
+
+        static bool CreateAndOpenMarket15()
+        {
+            //创建 IMarket
+            // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+            int err = -1;
+
+            market = ITradeApi.XFinApi_CreateMarketApi("XTA_W32/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", out err);
+
+            if (err > 0 || market == null)
+            {
+                Console.WriteLine(string.Format("* Market XFinApiCreateError={0};", StrCreateErrors[err]));
+                return false;
+            }
+
+            //注册事件
+            marketEvent = new MarketEvent();
+            market.SetListener(marketEvent);
+
+            //连接服务器
+            OpenParams openParams = new OpenParams();
+            openParams.HostAddress = CfgSE.MarketAddress;
+            openParams.BrokerID = CfgSE.BrokerID;
+            openParams.UserID = CfgSE.UserName;
+            openParams.Password = CfgSE.Password;
+            openParams.IsUTF8 = true;
+            market.Open(openParams);
+
+            return true;
+        }
+        static void MarketTest()
+        {
+            if (!CreateAndOpenMarket6()) //CTP_v6.3.6_20160606版本
+                return;
+            //if (!CreateAndOpenMarket13()) //CTP_v6.3.13_20181119版本
+            //    return;
+            //if (!CreateAndOpenMarket15()) //CTP_v6.3.15_20190220版本
+            //    return;
 
             /*
             连接成功后才能执行订阅行情等操作，检测方法有两种：
@@ -369,7 +464,7 @@ namespace CTPTradeApiSimpleDemoCSharp2015
 
         //////////////////////////////////////////////////////////////////////////////////
         //交易测试
-        static void TradeTest()
+        static bool CreateAndOpenTrade6()
         {
             //创建 ITrade
             // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
@@ -380,7 +475,7 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             if (err > 0 || trade == null)
             {
                 Console.WriteLine(string.Format("* Trade XFinApiCreateError={0};", StrCreateErrors[err]));
-                return;
+                return false;
             }
 
             //注册事件
@@ -388,7 +483,6 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             trade.SetListener(tradeEvent);
 
             //连接服务器
-            //Cfg.SetNonTradeTime();//非交易时段
             OpenParams openParams = new OpenParams();
             openParams.HostAddress = Cfg.TradeAddress;
             openParams.BrokerID = Cfg.BrokerID;
@@ -396,6 +490,82 @@ namespace CTPTradeApiSimpleDemoCSharp2015
             openParams.Password = Cfg.Password;
             openParams.IsUTF8 = true;
             trade.Open(openParams);
+
+            return true;
+        }
+
+        static bool CreateAndOpenTrade13()
+        {
+            //创建 ITrade
+            // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+            int err = -1;
+
+            trade = ITradeApi.XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll", out err);
+
+            if (err > 0 || trade == null)
+            {
+                Console.WriteLine(string.Format("* Trade XFinApiCreateError={0};", StrCreateErrors[err]));
+                return false;
+            }
+
+            //注册事件
+            tradeEvent = new TradeEvent();
+            trade.SetListener(tradeEvent);
+
+            //连接服务器
+            OpenParams openParams = new OpenParams();
+            openParams.HostAddress = CfgSE.TradeAddress;
+            openParams.BrokerID = CfgSE.BrokerID;
+            openParams.UserID = CfgSE.UserName;
+            openParams.Password = CfgSE.Password;
+            openParams.Configs.Add("AppID", CfgSE.AppID);
+            openParams.Configs.Add("AuthCode", CfgSE.AuthCode);
+            openParams.IsUTF8 = true;
+            trade.Open(openParams);
+
+            return true;
+        }
+
+        static bool CreateAndOpenTrade15()
+        {
+            //创建 ITrade
+            // char* path 指 xxx.exe 同级子目录中的 xxx.dll 文件
+            int err = -1;
+
+            trade = ITradeApi.XFinApi_CreateTradeApi("XTA_W32/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll", out err);
+
+            if (err > 0 || trade == null)
+            {
+                Console.WriteLine(string.Format("* Trade XFinApiCreateError={0};", StrCreateErrors[err]));
+                return false;
+            }
+
+            //注册事件
+            tradeEvent = new TradeEvent();
+            trade.SetListener(tradeEvent);
+
+            //连接服务器
+            OpenParams openParams = new OpenParams();
+            openParams.HostAddress = CfgSE.TradeAddress;
+            openParams.BrokerID = CfgSE.BrokerID;
+            openParams.UserID = CfgSE.UserName;
+            openParams.Password = CfgSE.Password;
+            openParams.Configs.Add("AppID", CfgSE.AppID);
+            openParams.Configs.Add("AuthCode", CfgSE.AuthCode);
+            openParams.IsUTF8 = false;
+            trade.Open(openParams);
+
+            return true;
+        }
+
+        static void TradeTest()
+        {
+            if (!CreateAndOpenTrade6()) //CTP_v6.3.6_20160606版本
+                return;
+            //if (!CreateAndOpenTrade13()) //CTP_v6.3.13_20181119版本
+            //    return;
+            //if (!CreateAndOpenTrade15()) //CTP_v6.3.15_20190220版本
+            //    return;
 
             /*
             //连接成功后才能执行查询、委托等操作，检测方法有两种：

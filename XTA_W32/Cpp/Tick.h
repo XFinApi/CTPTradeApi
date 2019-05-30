@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "XFinApiCommon.h"
+#include "ApiEnum.h"
 
 #define PRICE_TIERS	20
 #define OUT_OF_PRICE_TIERS(_idx)	(_idx < 0 || _idx >= PRICE_TIERS)

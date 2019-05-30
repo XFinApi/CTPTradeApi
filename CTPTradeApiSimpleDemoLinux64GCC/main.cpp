@@ -33,8 +33,6 @@ public:
 	Config()
 	{
 		//注册CTP仿真交易账号，www.simnow.com.cn
-
-		//交易时段
 		MarketAddress = "180.168.146.187:10010";
 		TradeAddress = "180.168.146.187:10000";
 
@@ -42,7 +40,7 @@ public:
 		UserName = "119486";//公用测试账户。为了测试准确，请注册使用您自己的账户。
 		Password = "a123456";
 
-		InstrumentID = "au1812";
+		InstrumentID = "IH1912";
 	}
 
 	void SetNonTradeTime()
@@ -54,11 +52,51 @@ public:
 	}
 };
 
+class ConfigSE
+{
+public:
+	//地址
+	std::string MarketAddress;
+	std::string TradeAddress;
+
+	//账户
+	std::string BrokerID;
+	std::string UserName;
+	std::string Password;
+
+	////合约
+	//std::string InstrumentID;
+
+	////行情
+	//double SellPrice1 = -1;
+	//double BuyPrice1 = -1;
+
+	//看穿式监管认证信息
+	std::string AppID;
+	std::string AuthCode;
+
+	ConfigSE()
+	{
+		//注册CTP仿真交易账号，www.simnow.com.cn
+		MarketAddress = "";
+		TradeAddress = "";
+
+		BrokerID = "";
+		UserName = "";
+		Password = "";
+		AppID = "";
+		AuthCode = "";
+
+		//InstrumentID = "IH1912";
+	}
+};
+
 class MarketEvent;
 class TradeEvent;
 
 //////////////////////////////////////////////////////////////////////////////////
 static Config Cfg;
+static ConfigSE CfgSE;
 static XFinApi::TradeApi::IMarket *market = nullptr;
 static XFinApi::TradeApi::ITrade *trade = nullptr;
 static MarketEvent *marketEvent = nullptr;
@@ -345,9 +383,9 @@ public:
 
 //////////////////////////////////////////////////////////////////////////////////
 //行情测试
-void MarketTest()
+static bool  CreateAndOpenMarket6()
 {
-	//创建 IMarket
+    //创建 IMarket
 	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
 	int err = -1;
 
@@ -356,7 +394,7 @@ void MarketTest()
 	if (err || !market)
 	{
 		printf("* Market XFinApiCreateError=%s;\n", StrCreateErrors[err]);
-		return;
+		return false;
 	}
 
 	//注册事件
@@ -372,6 +410,78 @@ void MarketTest()
 	openParams.Password = Cfg.Password;
 	openParams.IsUTF8 = true;
 	market->Open(openParams);
+	
+	return true;
+}
+
+static bool  CreateAndOpenMarket13()
+{
+    //创建 IMarket
+	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
+	int err = -1;
+
+	market = XFinApi_CreateMarketApi("XTA_L64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApi13.so", &err);
+
+	if (err || !market)
+	{
+		printf("* Market XFinApiCreateError=%s;\n", StrCreateErrors[err]);
+		return false;
+	}
+
+	//注册事件
+	marketEvent = new MarketEvent();
+	market->SetListener(marketEvent);
+
+	//连接服务器
+	XFinApi::TradeApi::OpenParams openParams;
+	openParams.HostAddress = CfgSE.MarketAddress;
+	openParams.BrokerID = CfgSE.BrokerID;
+	openParams.UserID = CfgSE.UserName;
+	openParams.Password = CfgSE.Password;
+	openParams.IsUTF8 = true;
+	market->Open(openParams);
+	
+	return true;
+}
+
+static bool  CreateAndOpenMarket15()
+{
+    //创建 IMarket
+	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
+	int err = -1;
+
+	market = XFinApi_CreateMarketApi("XTA_L64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApi15.so", &err);
+
+	if (err || !market)
+	{
+		printf("* Market XFinApiCreateError=%s;\n", StrCreateErrors[err]);
+		return false;
+	}
+
+	//注册事件
+	marketEvent = new MarketEvent();
+	market->SetListener(marketEvent);
+
+	//连接服务器
+	XFinApi::TradeApi::OpenParams openParams;
+	openParams.HostAddress = CfgSE.MarketAddress;
+	openParams.BrokerID = CfgSE.BrokerID;
+	openParams.UserID = CfgSE.UserName;
+	openParams.Password = CfgSE.Password;
+	openParams.IsUTF8 = true;
+	market->Open(openParams);
+	
+	return true;
+}
+
+void MarketTest()
+{
+	if (!CreateAndOpenMarket6()) //CTP_v6.3.6_20160606版本
+        return;
+    //if (!CreateAndOpenMarket13()) //CTP_v6.3.13_20181119版本
+    //    return;
+    //if (!CreateAndOpenMarket15()) //CTP_v6.3.15_20190220版本
+    //    return;
 
 	/*
 	连接成功后才能执行订阅行情等操作，检测方法有两种：
@@ -397,9 +507,9 @@ void MarketTest()
 
 //////////////////////////////////////////////////////////////////////////////////
 //交易测试
-void TradeTest()
+static bool CreateAndOpenTrade6()
 {
-	//创建 ITrade
+    //创建 ITrade
 	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
 	int err = -1;
 
@@ -408,7 +518,7 @@ void TradeTest()
 	if (err || !trade)
 	{
 		printf("* Trade XFinApiCreateError=%s;\n", StrCreateErrors[err]);
-		return;
+		return false;
 	}
 
 	//注册事件
@@ -424,6 +534,82 @@ void TradeTest()
 	openParams.Password = Cfg.Password;
 	openParams.IsUTF8 = true;
 	trade->Open(openParams);
+	
+	return true;
+}
+
+static bool CreateAndOpenTrade13()
+{
+    //创建 ITrade
+	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
+	int err = -1;
+
+	trade = XFinApi_CreateTradeApi("XTA_L64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApi13.so", &err);
+
+	if (err || !trade)
+	{
+		printf("* Trade XFinApiCreateError=%s;\n", StrCreateErrors[err]);
+		return false;
+	}
+
+	//注册事件
+	tradeEvent = new TradeEvent;
+	trade->SetListener(tradeEvent);
+
+	//连接服务器
+	XFinApi::TradeApi::OpenParams openParams;
+	openParams.HostAddress = CfgSE.TradeAddress;
+	openParams.BrokerID = CfgSE.BrokerID;
+	openParams.UserID = CfgSE.UserName;
+	openParams.Password = CfgSE.Password;
+	openParams.Configs.insert(std::make_pair(std::string("AppID"), CfgSE.AppID));
+	openParams.Configs.insert(std::make_pair(std::string("AuthCode"), CfgSE.AuthCode));
+	openParams.IsUTF8 = true;
+	trade->Open(openParams);
+	
+	return true;
+}
+
+static bool CreateAndOpenTrade15()
+{
+    //创建 ITrade
+	//const char* path 指 xxx.exe 同级子目录中的 xxx.so 文件
+	int err = -1;
+
+	trade = XFinApi_CreateTradeApi("XTA_L64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApi15.so", &err);
+
+	if (err || !trade)
+	{
+		printf("* Trade XFinApiCreateError=%s;\n", StrCreateErrors[err]);
+		return false;
+	}
+
+	//注册事件
+	tradeEvent = new TradeEvent;
+	trade->SetListener(tradeEvent);
+
+	//连接服务器
+	XFinApi::TradeApi::OpenParams openParams;
+	openParams.HostAddress = CfgSE.TradeAddress;
+	openParams.BrokerID = CfgSE.BrokerID;
+	openParams.UserID = CfgSE.UserName;
+	openParams.Password = CfgSE.Password;
+    openParams.Configs.insert(std::make_pair(std::string("AppID"), CfgSE.AppID));
+	openParams.Configs.insert(std::make_pair(std::string("AuthCode"), CfgSE.AuthCode));
+	openParams.IsUTF8 = true;
+	trade->Open(openParams);
+	
+	return  true;
+}
+
+void TradeTest()
+{
+	if (!CreateAndOpenTrade6()) //CTP_v6.3.6_20160606版本
+        return;
+    //if (!CreateAndOpenTrade13()) //CTP_v6.3.13_20181119版本
+    //    return;
+    //if (!CreateAndOpenTrade15()) //CTP_v6.3.15_20190220版本
+    //    return;
 
 	/*
 	//连接成功后才能执行查询、委托等操作，检测方法有两种：

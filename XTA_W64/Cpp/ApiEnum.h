@@ -504,5 +504,14 @@ namespace XFinApi
 			// 开仓价
 			OpenPrice = 4,
 		};
+
+		// 持仓类型
+		enum class PositionTypeKind
+		{
+			// 净仓
+			Net = 0,
+			// 综合
+			Gross = 1
+		};
 	}
 }

@@ -51,6 +51,8 @@ namespace TradeApi
         double CurrMargin = 0.0;
         // 手续费
         double Commission = 0.0;
+
+		bool IsSelfClosing = false;
     };
 }
 }

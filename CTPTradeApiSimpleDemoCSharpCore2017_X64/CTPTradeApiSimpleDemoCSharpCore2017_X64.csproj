@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(SolutionDir)..\XTA_W64\Api\CTP_v6.3.6_20160606 $(OutDir)XTA_W64\Api\CTP_v6.3.6_20160606 /I /E /Y&#xD;&#xA;xcopy $(SolutionDir)..\XTA_W64\CSharpCore\XFinApi.ITradeApi.PortCS.dll $(OutDir) /Y" />
+    <Exec Command="xcopy $(SolutionDir)..\XTA_W64\Api\CTP_v6.3.6_20160606 $(OutDir)XTA_W64\Api\CTP_v6.3.6_20160606 /I /E /Y&#xD;&#xA;xcopy $(SolutionDir)..\XTA_W64\Api\CTP_v6.3.13_20181119 $(OutDir)XTA_W64\Api\CTP_v6.3.13_20181119 /I /E /Y&#xD;&#xA;xcopy $(SolutionDir)..\XTA_W64\Api\CTP_v6.3.15_20190220 $(OutDir)XTA_W64\Api\CTP_v6.3.15_20190220 /I /E /Y&#xD;&#xA;xcopy $(SolutionDir)..\XTA_W64\CSharpCore\XFinApi.ITradeApi.PortCS.dll $(OutDir) /Y" />
   </Target>
 
 </Project>

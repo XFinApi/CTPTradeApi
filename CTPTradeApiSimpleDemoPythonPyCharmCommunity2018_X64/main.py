@@ -20,12 +20,31 @@ class Config:
     Password = "a123456";
 
     # 合约
-    InstrumentID = "au1812";
+    InstrumentID = "IH1912";
 
     # 行情
     AskPrice1 = -1;
     BidPrice1 = -1;
 
+class ConfigSE:
+    MarketAddress = "";
+    TradeAddress = "";
+    # 注册CTP仿真交易账号，www.simnow.com.cn
+    # 账户
+    BrokerID = "";
+    UserName = "";
+    Password = "";
+
+    # 看穿式监管认证信息
+    AppID = "";
+    AuthCode = "";
+
+    ## 合约
+    #InstrumentID = "IH1912";
+
+    ## 行情
+    #AskPrice1 = -1;
+    #BidPrice1 = -1;
 
 # API
 # 创建失败错误码的含义，其他错误码的含义参见XTA_W64\Cpp\ApiEnum.h文件
@@ -99,10 +118,12 @@ class MarketEvent(XFinApi_TradeApi.MarketListener):
 class MarketTest:
     market = 0
     cfg = 0
+    cfgSE = 0
     marketEvent = 0
 
-    def __init__(self,cfg):
+    def __init__(self,cfg,cfgSE):
         self.cfg = cfg
+        self.cfgSE = cfgSE
 
     def __del__(self):
         if isinstance(self.marketEvent,MarketEvent):
@@ -124,6 +145,40 @@ class MarketTest:
         openParams.BrokerID = self.cfg.BrokerID
         openParams.UserID = self.cfg.UserName
         openParams.Password = self.cfg.Password
+        openParams.IsUTF8 = True
+        self.market.Open(openParams)
+        
+    def test13(self):
+        self.market = XFinApi_TradeApi.XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll")
+        if isinstance(self.market,int):
+            print("* Market XFinApiCreateError={};".format(StrCreateErrors[self.market]))
+            return
+        else:
+            self.market = self.market[0]
+        self.marketEvent = MarketEvent(self.market,self.cfgSE)
+        self.market.SetListener(self.marketEvent)
+        openParams = XFinApi_TradeApi.OpenParams()
+        openParams.HostAddress = self.cfgSE.MarketAddress
+        openParams.BrokerID = self.cfgSE.BrokerID
+        openParams.UserID = self.cfgSE.UserName
+        openParams.Password = self.cfgSE.Password
+        openParams.IsUTF8 = True
+        self.market.Open(openParams)
+        
+    def test15(self):
+        self.market = XFinApi_TradeApi.XFinApi_CreateMarketApi("XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll")
+        if isinstance(self.market,int):
+            print("* Market XFinApiCreateError={};".format(StrCreateErrors[self.market]))
+            return
+        else:
+            self.market = self.market[0]
+        self.marketEvent = MarketEvent(self.market,self.cfgSE)
+        self.market.SetListener(self.marketEvent)
+        openParams = XFinApi_TradeApi.OpenParams()
+        openParams.HostAddress = self.cfgSE.MarketAddress
+        openParams.BrokerID = self.cfgSE.BrokerID
+        openParams.UserID = self.cfgSE.UserName
+        openParams.Password = self.cfgSE.Password
         openParams.IsUTF8 = True
         self.market.Open(openParams)
 
@@ -213,11 +268,13 @@ class TradeEvent(XFinApi_TradeApi.TradeListener):
 
 class TradeTest:
     cfg = 0
+    cfgSE = 0
     trade = 0
     tradeEvent = 0
 
-    def __init__(self,cfg):
+    def __init__(self,cfg,cfgSE):
         self.cfg = cfg
+        self.cfgSE = cfgSE
 
     def __del__(self):
         if isinstance(self.tradeEvent,TradeEvent):
@@ -225,28 +282,7 @@ class TradeTest:
         if isinstance(self.trade,XFinApi_TradeApi.ITrade):
             XFinApi_TradeApi.XFinApi_ReleaseTradeApi(self.trade)
 
-    def Test(self):
-        # 创建ITrade char * path指xxx.exe同级子目录中的xxx.dll文件
-        self.trade = XFinApi_TradeApi.XFinApi_CreateTradeApi(
-            "XTA_W64/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll")
-        if isinstance(self.trade,int):
-            print("* Trade XFinApiCreateError={};".format(StrCreateErrors[self.trade]))
-            return
-        else:
-            self.trade = self.trade[0]
-
-        self.tradeEvent = TradeEvent(self.trade,self.cfg)
-        self.trade.SetListener(self.tradeEvent)
-        openParams = XFinApi_TradeApi.OpenParams()
-        openParams.HostAddress = self.cfg.TradeAddress
-        openParams.BrokerID = self.cfg.BrokerID
-        openParams.UserID = self.cfg.UserName
-        openParams.Password = self.cfg.Password
-        openParams.IsUTF8 = True
-
-        self.trade.Open(openParams)
-        # 连接服务器 Cfg.SetNonTradeTime();  非交易时段
-
+    def QryAndOrder(self,cfg):
         # 连接成功后才能执行查询、委托等操作，检测方法有两种：
         # 1、self.trade.IsOpened() == 1
         # 2、TradeEvent的OnNotify中
@@ -255,7 +291,7 @@ class TradeTest:
             time.sleep(1)
 
         qryParam = XFinApi_TradeApi.QueryParams()
-        qryParam.InstrumentID = self.cfg.InstrumentID
+        qryParam.InstrumentID = cfg.InstrumentID
 
         # 查询委托单 有些接口查询有间隔限制，如：CTP查询间隔为1秒
         time.sleep(1)
@@ -291,8 +327,8 @@ class TradeTest:
         print("Press any key to OrderAction.");
         input()
         order = XFinApi_TradeApi.Order()
-        order.InstrumentID = self.cfg.InstrumentID
-        order.Price = self.cfg.AskPrice1
+        order.InstrumentID = cfg.InstrumentID
+        order.Price = cfg.AskPrice1
         order.Volume = 1
         order.Direction = XFinApi_TradeApi.DirectionKind_Buy
         order.OpenCloseType = XFinApi_TradeApi.OpenCloseKind_Open
@@ -305,14 +341,91 @@ class TradeTest:
         order.ContingentCond = XFinApi_TradeApi.ContingentCondKind_Immediately  # 立即
         order.HedgeType = XFinApi_TradeApi.HedgeKind_Speculation  # 投机
         self.trade.OrderAction(order)
+        
+    def Test(self):
+        # 创建ITrade char * path指xxx.exe同级子目录中的xxx.dll文件
+        self.trade = XFinApi_TradeApi.XFinApi_CreateTradeApi(
+            "XTA_W64/Api/CTP_v6.3.6_20160606/XFinApi.CTPTradeApi.dll")
+        if isinstance(self.trade,int):
+            print("* Trade XFinApiCreateError={};".format(StrCreateErrors[self.trade]))
+            return
+        else:
+            self.trade = self.trade[0]
 
+        self.tradeEvent = TradeEvent(self.trade,self.cfg)
+        self.trade.SetListener(self.tradeEvent)
+        openParams = XFinApi_TradeApi.OpenParams()
+        openParams.HostAddress = self.cfg.TradeAddress
+        openParams.BrokerID = self.cfg.BrokerID
+        openParams.UserID = self.cfg.UserName
+        openParams.Password = self.cfg.Password
+        openParams.IsUTF8 = True
+
+        self.trade.Open(openParams)
+        
+        self.QryAndOrder(self.cfg)
+        
+    def Test13(self):
+        # 创建ITrade char * path指xxx.exe同级子目录中的xxx.dll文件
+        self.trade = XFinApi_TradeApi.XFinApi_CreateTradeApi(
+            "XTA_W64/Api/CTP_v6.3.13_20181119/XFinApi.CTPTradeApiSE.dll")
+        if isinstance(self.trade,int):
+            print("* Trade XFinApiCreateError={};".format(StrCreateErrors[self.trade]))
+            return
+        else:
+            self.trade = self.trade[0]
+
+        self.tradeEvent = TradeEvent(self.trade,self.cfgSE)
+        self.trade.SetListener(self.tradeEvent)
+        openParams = XFinApi_TradeApi.OpenParams()
+        openParams.HostAddress = self.cfgSE.TradeAddress
+        openParams.BrokerID = self.cfgSE.BrokerID
+        openParams.UserID = self.cfgSE.UserName
+        openParams.Password = self.cfgSE.Password
+        openParams.Configs["AppID"] = self.cfgSE.AppID
+        openParams.Configs["AuthCode"] = self.cfgSE.AuthCode
+        openParams.IsUTF8 = True
+
+        self.trade.Open(openParams)
+        
+        self.QryAndOrder(self.cfgSE)
+        
+    def Test15(self):
+        # 创建ITrade char * path指xxx.exe同级子目录中的xxx.dll文件
+        self.trade = XFinApi_TradeApi.XFinApi_CreateTradeApi(
+            "XTA_W64/Api/CTP_v6.3.15_20190220/XFinApi.CTPTradeApiSE.dll")
+        if isinstance(self.trade,int):
+            print("* Trade XFinApiCreateError={};".format(StrCreateErrors[self.trade]))
+            return
+        else:
+            self.trade = self.trade[0]
+
+        self.tradeEvent = TradeEvent(self.trade,self.cfgSE)
+        self.trade.SetListener(self.tradeEvent)
+        openParams = XFinApi_TradeApi.OpenParams()
+        openParams.HostAddress = self.cfgSE.TradeAddress
+        openParams.BrokerID = self.cfgSE.BrokerID
+        openParams.UserID = self.cfgSE.UserName
+        openParams.Password = self.cfgSE.Password
+        openParams.Configs["AppID"] = self.cfgSE.AppID
+        openParams.Configs["AuthCode"] = self.cfgSE.AuthCode
+        openParams.IsUTF8 = True
+
+        self.trade.Open(openParams)
+        
+        self.QryAndOrder(self.cfgSE)
 
 def main():
     cfg = Config
-    mt = MarketTest(cfg)
-    mt.test()
-    tt = TradeTest(cfg)
-    tt.Test()
+    cfgSE = ConfigSE
+    mt = MarketTest(cfg,cfgSE)
+    mt.test()   #CTP_v6.3.6_20160606版本
+    #mt.test13()#CTP_v6.3.6_20160606版本
+    #mt.test15()#CTP_v6.3.6_20160606版本
+    tt = TradeTest(cfg,cfgSE)
+    tt.Test()   #CTP_v6.3.6_20160606版本
+    #tt.Test13()#CTP_v6.3.6_20160606版本
+    #tt.Test15()#CTP_v6.3.6_20160606版本
     time.sleep(1)
     del mt
     del tt
