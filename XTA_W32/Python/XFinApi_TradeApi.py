@@ -916,6 +916,8 @@ ExecResultKind_NoEnoughHistoryTrade = _XFinApi_TradeApi.ExecResultKind_NoEnoughH
 ExecResultKind_Unknown = _XFinApi_TradeApi.ExecResultKind_Unknown
 DirectionKind_Buy = _XFinApi_TradeApi.DirectionKind_Buy
 DirectionKind_Sell = _XFinApi_TradeApi.DirectionKind_Sell
+DirectionKind_FinancingToBuy = _XFinApi_TradeApi.DirectionKind_FinancingToBuy
+DirectionKind_SecuritiesToSell = _XFinApi_TradeApi.DirectionKind_SecuritiesToSell
 OpenCloseKind_Open = _XFinApi_TradeApi.OpenCloseKind_Open
 OpenCloseKind_Close = _XFinApi_TradeApi.OpenCloseKind_Close
 OpenCloseKind_ForceClose = _XFinApi_TradeApi.OpenCloseKind_ForceClose
@@ -1105,6 +1107,9 @@ ErrExchangeRejectCancelOrder = cvar.ErrExchangeRejectCancelOrder
 ErrAuthCode = cvar.ErrAuthCode
 ErrOrderCounterNo = cvar.ErrOrderCounterNo
 ErrNotSupport = cvar.ErrNotSupport
+ErrPasswordErrorNumberOverrun = cvar.ErrPasswordErrorNumberOverrun
+ErrAccountFrozened = cvar.ErrAccountFrozened
+ErrIncorrectAuthorizationInformation = cvar.ErrIncorrectAuthorizationInformation
 
 class CodeInfo(_object):
     __swig_setmethods__ = {}
@@ -1294,6 +1299,14 @@ class Tick(_object):
     __swig_getmethods__["LocalTime"] = _XFinApi_TradeApi.Tick_LocalTime_get
     if _newclass:
         LocalTime = _swig_property(_XFinApi_TradeApi.Tick_LocalTime_get, _XFinApi_TradeApi.Tick_LocalTime_set)
+    __swig_setmethods__["LocalTimeUS"] = _XFinApi_TradeApi.Tick_LocalTimeUS_set
+    __swig_getmethods__["LocalTimeUS"] = _XFinApi_TradeApi.Tick_LocalTimeUS_get
+    if _newclass:
+        LocalTimeUS = _swig_property(_XFinApi_TradeApi.Tick_LocalTimeUS_get, _XFinApi_TradeApi.Tick_LocalTimeUS_set)
+    __swig_setmethods__["DeltaTimeUS"] = _XFinApi_TradeApi.Tick_DeltaTimeUS_set
+    __swig_getmethods__["DeltaTimeUS"] = _XFinApi_TradeApi.Tick_DeltaTimeUS_get
+    if _newclass:
+        DeltaTimeUS = _swig_property(_XFinApi_TradeApi.Tick_DeltaTimeUS_get, _XFinApi_TradeApi.Tick_DeltaTimeUS_set)
     __swig_setmethods__["TradingState"] = _XFinApi_TradeApi.Tick_TradingState_set
     __swig_getmethods__["TradingState"] = _XFinApi_TradeApi.Tick_TradingState_get
     if _newclass:

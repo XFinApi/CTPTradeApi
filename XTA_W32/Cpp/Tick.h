@@ -42,6 +42,10 @@ namespace TradeApi
         std::string TradingTime;
         // 本地日期时间
         std::string LocalTime;
+
+		uint64_t LocalTimeUS = 0;
+		uint64_t DeltaTimeUS = 0;
+
         // 交易状态
         int TradingState = INT32_DEFAULT;
         // 趋势

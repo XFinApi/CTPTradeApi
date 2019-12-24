@@ -242,6 +242,12 @@ namespace XFinApi
 			DEFINE_CODE(ErrOrderCounterNo);
 			// 接口不支持
 			DEFINE_CODE(ErrNotSupport);
+			// 密码错误次数超限
+			DEFINE_CODE(ErrPasswordErrorNumberOverrun);
+			// 账户已被冻结
+			DEFINE_CODE(ErrAccountFrozened);
+			// 授权信息不正确
+			DEFINE_CODE(ErrIncorrectAuthorizationInformation);
 #undef DEFINE_CODE
 		}
 
@@ -316,7 +322,11 @@ namespace XFinApi
 			// 买
 			Buy = 0,
 			// 卖
-			Sell = 1
+			Sell = 1,
+			// 融资买入
+			FinancingToBuy = 2,
+			// 融券卖出
+			SecuritiesToSell = 3
 		};
 
 		// 开平类型

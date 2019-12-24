@@ -100,7 +100,9 @@ namespace TradeApi
 
 	inline bool IsDefaultValue(double v)
 	{
-		return std::isnan(v);
+		return std::isnan(v) ||
+			v == (std::numeric_limits<double>::max)() ||
+			v == (std::numeric_limits<double>::min)();
 	}
 
     inline bool IsDefaultValue(const std::string &v)

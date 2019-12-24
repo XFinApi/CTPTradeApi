@@ -53,7 +53,7 @@ _CTP_: 6.3.6版本
 _CTPSE13_: 6.3.13版本
 _CTPSE15_: 6.3.15版本
 */
-#define _CTP_ 
+#define _CTPSE15_ 
 //////////////////////////////////////////////////////////////////////////////////
 //配置信息
 class Config
@@ -69,6 +69,7 @@ public:
 	std::string Password;
 
 	//合约
+	std::string ExchangeID;
 	std::string InstrumentID;
 
 	//行情
@@ -94,17 +95,17 @@ public:
 		Password = "a123456";
 #else
 		//看穿式监管
-		MarketAddress = "";
-		TradeAddress = "";
+		MarketAddress = "180.168.146.187:10110";
+		TradeAddress = "180.168.146.187:10100";
 
-		BrokerID = "";
-		UserName = "";
-		Password = "";
+		BrokerID = "9999";
+		UserName = "119486";//公用测试账户。为了测试准确，请注册使用您自己的账户。
+		Password = "a123456";
 		AppID = "";
 		AuthCode = "";
 #endif
-
-		InstrumentID = "IH1912";
+		ExchangeID = "CFFEX";
+		InstrumentID = "IH2006";
 	}
 
 	void SetNonTradeTime()
@@ -114,6 +115,10 @@ public:
 #ifdef _CTP_
 		MarketAddress = "180.168.146.187:10031";
 		TradeAddress = "180.168.146.187:10030";
+#else
+		//看穿式监管
+		MarketAddress = "180.168.146.187:10131";
+		TradeAddress = "180.168.146.187:10130";
 #endif
 	}
 };
@@ -629,6 +634,7 @@ void TradeTest()
 	std::cout << "Press any key to OrderAction.\n";
 	getchar();
 	XFinApi::TradeApi::Order order;
+	order.ExchangeID = Cfg.ExchangeID;
 	order.InstrumentID = Cfg.InstrumentID;
 	order.Price = Cfg.SellPrice1;
 	order.Volume = 1;
@@ -658,13 +664,13 @@ int main()
 		getchar();
 	}
 
-#ifndef _CTP_
-	if (Cfg.AppID == "" || Cfg.AuthCode == "")
-	{
-		std::cout << "请先在Config类中设置看穿式监管认证信息.\n";
-		getchar();
-	}
-#endif // !_CTP_
+//#ifndef _CTP_
+//	if (Cfg.AppID == "" || Cfg.AuthCode == "")
+//	{
+//		std::cout << "请先在Config类中设置看穿式监管认证信息.\n";
+//		getchar();
+//	}
+//#endif // !_CTP_
 
 	MarketTest();
 	TradeTest();
